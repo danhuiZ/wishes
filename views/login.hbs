@@ -31,12 +31,12 @@ console.log("in script");
            url:'/friendList',
            method:'post',
            data:{
-             response:"get info",
+             friendList:response.data,
              username:username,
              facebookId:facebookID
            },
            success: function(res) {
-             alert(res.err)
+             alert(res.friendList)
              window.top.location = "https://ronchon-croissant-34901.herokuapp.com/"+res.mongooseId+"/friendList"; //redirect to friendlist page
            },
            error: function(res) {

@@ -36,8 +36,12 @@ routes.post('/friendList',(req,res)=> {
         return;
       })
     } else {
-      console.log("found user");
-      res.json({err:err,found:found,mongooseId:found._id});
+      // User.findByIdAndUpdate(found._id,{friendList:req.body.friendList.map(friend=>{
+      //   User.findOne({facebookId:req.body.facebookId}).exec((err,found)=>{
+      //     return found._id;
+      //   })
+      // })})
+      res.json({err:err,found:found,mongooseId:found._id,friendList:req.body.friendList});
     }
   })
 });
