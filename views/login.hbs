@@ -9,7 +9,6 @@ console.log("in script");
    fjs.parentNode.insertBefore(js, fjs);
  }(document, 'script', 'facebook-jssdk'));
   window.fbAsyncInit = function() {
-    console.log("init");
     FB.init({
       appId            : '167922013750290',
       autoLogAppEvents : true,
@@ -17,11 +16,10 @@ console.log("in script");
       xfbml            : true,
       version          : 'v2.9' // or v2.8, v2.7, v2.6, v2.5, v2.4, v2.3,
     });
-    console.log("after log");
     FB.login(function(response) {
-      console.log(response);
       if (response.authResponse) {
        console.log('Welcome!  Fetching your information.... ');
+       console.log(response);
        FB.api('/me', function(response) {
          console.log('Good to see you, ' + response.name + '.');
        });
@@ -33,7 +31,7 @@ console.log("in script");
              response:"get info"
            },
            success: function(res) {
-             window.top.location = "http://localhost:3000/friendList";
+             window.top.location = "http://localhost:3000/friendList"; //redirect to friendlist page
              alert(res);
            },
            error: function(res) {
@@ -43,9 +41,10 @@ console.log("in script");
          console.log(response)
        })
       } else {
-       console.log('User cancelled login or did not fully authorize.');
+       alert('User cancelled login or did not fully authorize.');
+       window.top.location = "http://localhost:3000" //redirect to mainpage
       }
-    },{scope:'email,user_friends'});
+    },{scope:'email,user_friends,public_profile'});
   };
   console.log("in ready");
 </script>
