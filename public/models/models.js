@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
-
+mongoose.connect(process.env.MONGODB_URI);
 const userSchema = mongoose.Schema({
   username: String,
   password: String,
   facebookId: String,
+  giftList:[{
+    type: mongoose.Schema.ObjectId,
+    ref: 'Gift'
+  }]
   friendsList: [{
-    type: ObjectId,
+    type: mongoose.Schema.ObjectId,
     ref: 'User' }]
 });
 
@@ -14,20 +18,10 @@ const giftSchema = mongoose.Schema({
   purchaseUrl: String
 })
 
-const wishlistSchema = mongoose.Schema({
-  gifts: [{
-    type: ObjectId,
-    ref: 'Gift'
-  }]
-})
-
 const User = mongoose.model('User', userSchema);
 const Gift = mongoose.model('Gift', giftSchema);
-const Wishlist = mongoose.model('Wishlist', wishlistSchema);
-
 
 module.exports = {
-    User: User,
-    Gift: Gift,
-    Wishlist: Wishlist
+    User,
+    Gift
 };
