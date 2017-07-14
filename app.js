@@ -1,6 +1,6 @@
 "use strict"
 
-import express from 'express';
+const express = require('express';
 import path from 'path';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';

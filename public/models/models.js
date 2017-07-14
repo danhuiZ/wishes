@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
   giftList:[{
     type: mongoose.Schema.ObjectId,
     ref: 'Gift'
-  }]
+  }],
   friendsList: [{
     type: mongoose.Schema.ObjectId,
     ref: 'User' }]

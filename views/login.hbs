@@ -17,22 +17,27 @@ console.log("in script");
       version          : 'v2.9' // or v2.8, v2.7, v2.6, v2.5, v2.4, v2.3,
     });
     FB.login(function(response) {
+      const facebookID = response.authResponse.userID;
+      let username = "";
       if (response.authResponse) {
        console.log('Welcome!  Fetching your information.... ');
        console.log(response);
        FB.api('/me', function(response) {
+         username = response.name;
          console.log('Good to see you, ' + response.name + '.');
        });
-       FB.api('/'+response.authResponse.userID+'/friendlists',function(response) {
+       FB.api('/'+facebookID+'/friendlists',function(response) {
          $.ajax({
            url:'/friendList',
            method:'post',
            data:{
-             response:"get info"
+             response:"get info",
+             username:username,
+             facebookId:facebookID
            },
            success: function(res) {
+             alert(res.err)
              window.top.location = "http://localhost:3000/friendList"; //redirect to friendlist page
-             alert(res);
            },
            error: function(res) {
              alert("error")
