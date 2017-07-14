@@ -13,8 +13,15 @@ routes.get('/login',(req,res)=> {
   res.render('login');
 });
 
-routes.get('/friendList',(req,res)=> {
-  res.send("friens")
+routes.get('/:userId/friendList',(req,res)=> {
+  User.findOne({_id:req.params.mongooseId}).exec((err,found)=> {
+    if (err) {res.send(err)};
+    else {
+      res.render('friendList',{
+        friendList:found.friendList
+      })
+    }
+  })
 });
 
 routes.post('/friendList',(req,res)=> {
@@ -29,12 +36,9 @@ routes.post('/friendList',(req,res)=> {
         return;
       })
     } else {
-      res.json({err:err,found:found});
+      res.json({err:err,found:found,mongooseId:found._id});
     }
   })
-  // res.send(req.body.response);
-  // res.json({response:req.body.response});
-  // res.redirect('/friendList');
 });
 
 export default routes;

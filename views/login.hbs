@@ -37,7 +37,7 @@ console.log("in script");
            },
            success: function(res) {
              alert(res.err)
-             window.top.location = "http://localhost:3000/friendList"; //redirect to friendlist page
+             window.top.location = "http://localhost:3000/"+res.mongooseId+"/friendList"; //redirect to friendlist page
            },
            error: function(res) {
              alert("error")
