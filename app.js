@@ -1,12 +1,23 @@
 "use strict"
 
-import express from 'express';
-import path from 'path';
-import logger from 'morgan';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
+// import express from 'express';
+// import path from 'path';
+// import logger from 'morgan';
+// import cookieParser from 'cookie-parser';
+// import bodyParser from 'body-parser';
+//
+// import routes from './routes/index';
 
-import routes from './routes/index';
+const express = require('express');
+const path =  require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+
+const routes = require('./routes/index');
+
+
+
 
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
