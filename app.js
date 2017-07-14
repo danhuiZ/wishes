@@ -7,7 +7,6 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 
 import routes from './routes/index';
-import auth from './routes/auth';
 
 const app = express();
 app.set('views', path.join(__dirname, 'views'));

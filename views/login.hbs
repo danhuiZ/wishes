@@ -1,0 +1,51 @@
+<script src="/js/jquery.min.js"></script>
+<script>
+console.log("in script");
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=167922013750290";
+   fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
+  window.fbAsyncInit = function() {
+    console.log("init");
+    FB.init({
+      appId            : '167922013750290',
+      autoLogAppEvents : true,
+      status           : true,
+      xfbml            : true,
+      version          : 'v2.9' // or v2.8, v2.7, v2.6, v2.5, v2.4, v2.3,
+    });
+    console.log("after log");
+    FB.login(function(response) {
+      console.log(response);
+      if (response.authResponse) {
+       console.log('Welcome!  Fetching your information.... ');
+       FB.api('/me', function(response) {
+         console.log('Good to see you, ' + response.name + '.');
+       });
+       FB.api('/'+response.authResponse.userID+'/friendlists',function(response) {
+         $.ajax({
+           url:'/friendList',
+           method:'post',
+           data:{
+             response:"get info"
+           },
+           success: function(res) {
+             window.top.location = "http://localhost:3000/friendList";
+             alert(res);
+           },
+           error: function(res) {
+             alert("error")
+           }
+         })
+         console.log(response)
+       })
+      } else {
+       console.log('User cancelled login or did not fully authorize.');
+      }
+    },{scope:'email,user_friends'});
+  };
+  console.log("in ready");
+</script>
