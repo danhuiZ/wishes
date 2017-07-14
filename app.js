@@ -24,7 +24,7 @@ app.use(cookieParser());
 // const FacebookStrategy = Facebook.Strategy;
 //
 // app.use(session({ secret:"hahaha" }));
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 //
 // passport.use(new FacebookStrategy({
 //     clientID: process.env.FACEBOOK_APP_ID,
@@ -50,7 +50,7 @@ app.use(cookieParser());
 // app.use(passport.session());
 //
 // app.use('/',auth(passport));
-// app.use('/',routes);
+app.use('/',routes);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
