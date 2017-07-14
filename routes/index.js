@@ -26,6 +26,7 @@ routes.get('/:userId/friendList',(req,res)=> {
 
 routes.post('/friendList',(req,res)=> {
   User.findOne({facebookId:req.body.facebookId},(err,found)=> {
+    console.log(found);
     if (found === null) {
       const newUser = new User({
         username: req.body.username,

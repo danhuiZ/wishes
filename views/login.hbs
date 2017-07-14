@@ -17,13 +17,15 @@ console.log("in script");
       version          : 'v2.9' // or v2.8, v2.7, v2.6, v2.5, v2.4, v2.3,
     });
     FB.login(function(response) {
-      const facebookID = response.authResponse.userID;
+      const accessToken = response.authResponse.accessToken;
+      let facebookID = "";
       let username = "";
       if (response.authResponse) {
        console.log('Welcome!  Fetching your information.... ');
        console.log(response);
        FB.api('/me', function(response) {
          username = response.name;
+         facebookID = response.id;
          console.log('Good to see you, ' + response.name + '.');
        });
        FB.api('/'+facebookID+'/friendlists',function(response) {
@@ -36,7 +38,7 @@ console.log("in script");
              facebookId:facebookID
            },
            success: function(res) {
-             alert(res.friendList)
+             alert("successs")
              window.top.location = "https://ronchon-croissant-34901.herokuapp.com/"+res.mongooseId+"/friendList"; //redirect to friendlist page
            },
            error: function(res) {
