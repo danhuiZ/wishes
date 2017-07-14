@@ -1,0 +1,25 @@
+{
+  "name": "wishes",
+  "version": "1.0.0",
+  "description": "7/11/2017",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danhuiZ/wishes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danhuiZ/wishes/issues"
+  },
+  "homepage": "https://github.com/danhuiZ/wishes#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "express-validator": "^3.2.1",
+    "mongoose": "^4.11.2",
+    "passport-facebook": "^2.1.1"
+  }
+}
