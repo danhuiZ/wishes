@@ -36,6 +36,10 @@ routes.get('/:userId/friendList',(req,res)=> {
   })
 });
 
+routes.get('/:friendId/wishlists',(req,res)=> {
+  const friendid = req.params.friendId;
+  
+})
 routes.post('/friendList',(req,res)=> {
   User.findOne({facebookId:req.body.facebookId}).exec((err,found)=> {
     console.log(found);
