@@ -27,29 +27,30 @@ console.log("in script");
          username = response.name;
          facebookID = response.id;
          console.log('Good to see you, ' + response.name + '.');
-       });
-       FB.api('/'+facebookID+'/friendlists',function(response) {
-         $.ajax({
-           url:'/friendList',
-           method:'post',
-           data:{
-             friendList:response.data,
-             username:username,
-             facebookId:facebookID
-           },
-           success: function(res) {
-             alert("successs")
-             window.top.location = "https://ronchon-croissant-34901.herokuapp.com/"+res.mongooseId+"/friendList"; //redirect to friendlist page
-           },
-           error: function(res) {
-             alert("error")
-           }
+         FB.api('/'+facebookID+'/friends',function(friendResponse) {
+           const friendString = friendResponse.data.map( friend=> friend.id).join('/')
+           $.ajax({
+             url:'/friendList',
+             method:'post',
+             data:{
+               friendList:friendString,
+               username:username,
+               facebookId:facebookID
+             },
+             success: function(res) {
+               console.log("success");
+               console.log(res)
+               window.top.location = "https://cff1e058.ngrok.io/"+res.mongooseId+"/friendList"; //redirect to friendlist page
+             },
+             error: function(res) {
+               alert(res)
+             }
+           })
          })
-         console.log(response)
        })
       } else {
        alert('User cancelled login or did not fully authorize.');
-       window.top.location = "https://ronchon-croissant-34901.herokuapp.com/" //redirect to mainpage
+       window.top.location = "https://cff1e058.ngrok.io" //redirect to mainpage
       }
     },{scope:'email,user_friends,public_profile'});
   };
