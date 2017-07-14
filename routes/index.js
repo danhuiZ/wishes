@@ -31,8 +31,8 @@ routes.post('/friendList',(req,res)=> {
         username: req.body.username,
         facebookId: req.body.facebookId,
       });
-      newUser.save((err,newUser)=> {
-        res.json({err:err,found:found,mongooseId:newUser._id});
+      newUser.save((err, newUser)=> {
+        res.json({err: err, found: found, mongooseId: newUser._id});
         return;
       })
     } else {
