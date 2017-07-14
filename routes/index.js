@@ -1,5 +1,6 @@
-import express from 'express';
-import models from '../public/models/models';
+const express = require('express');
+const models = require('../public/models/models');
+
 
 const User = models.User;
 const Gift = models.Gift;
