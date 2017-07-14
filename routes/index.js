@@ -15,13 +15,12 @@ routes.get('/login',(req,res)=> {
 });
 
 routes.get('/:userId/friendList',(req,res)=> {
-  User.findOne({_id:req.params.mongooseId}).exec((err,found)=> {
-    if (err) {res.send(err)};
-    else {
-      res.render('friendList',{
-        friendList:found.friendList
-      })
-    }
+  User.findOne({_id:req.params.userId}).exec((err,found)=> {
+    res.render('friendList',{
+      friendList:found.friendList,
+      found:found,
+      error:err
+    })
   })
 });
 
@@ -37,9 +36,10 @@ routes.post('/friendList',(req,res)=> {
         return;
       })
     } else {
+      console.log("found user");
       res.json({err:err,found:found,mongooseId:found._id});
     }
   })
 });
 
-export default routes;
+module.exports = routes;
