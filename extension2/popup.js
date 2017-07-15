@@ -26,13 +26,6 @@ document.addEventListener('DOMContentLoaded', function(a) {
           alert("clicking");
           window.open('https://ronchon-croissant-34901.herokuapp.com/');
         })
-        // alert("not logged in");
-        // let div = document.createElement('button');
-        // div.innerText="connect to facebook";
-        // div.setAttribute('id','connectFB');
-        // document.body.appendChild(div);
-        // document.getElementById('connectFB').addEventListener('click',function() {
-        // })
       }
     }
   })
