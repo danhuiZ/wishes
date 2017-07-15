@@ -13,8 +13,9 @@ document.addEventListener('DOMContentLoaded', function(a) {
       alert(data)
       if (data.facebookid !== "") {
         alert("logged in")
+        facebookid = data.facebookid;
         chrome.browserAction.onClicked.addListener(function(activeTab) {
-          window.open('https://ronchon-croissant-34901.herokuapp.com/'+data.facebookid+'/friendList');
+          window.open('https://ronchon-croissant-34901.herokuapp.com/'+facebookid+'/friendList');
         })
         facebookid = data.facebookid;
         alert("you logged in as "+ data.name)
