@@ -32,8 +32,9 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
     User.findById(friendid).populate('giftList').exec((err, found)=> {
       res.render('wishList',{
         wishes: found.giftList,
+        found: foundSelf,
         friend: found,
-        loggedinUser: foundSelf
+        friendList: foundSelf.friendsList
       })
     })
   })
