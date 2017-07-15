@@ -64,6 +64,7 @@ routes.post('/authenticate', (req,res)=> {
   User.findOne({facebookid:facebookid}).exec((err,saved)=> {
     res.json({facebookid:facebookid || "", name:saved.username});
   })
+});
 
 
 routes.post('/friendList',(req,res)=> {
