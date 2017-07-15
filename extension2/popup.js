@@ -17,11 +17,11 @@ document.addEventListener('DOMContentLoaded', function(a) {
         chrome.browserAction.setIcon({path: "color.png"});
         chrome.tabs.onUpdated.addListener(function(tab){
           chrome.tabs.getAllInWindow(null, function(tabs){
-              for (var i = 0; i < tabs.length; i++) {
-                if (allURL.indexOf(tabs[i].url.toString()) !== -1) {
-                  chrome.notifications.create({type:'basic', iconUrl:'https://68.media.tumblr.com/c7c539e52b98d5c3135cebb238b4d39d/tumblr_ot4abpNFfa1rwyec1o1_75sq.png', title:"Wish List", message:'One of your friends has this wish'})
-                }
+            for (var i = 0; i < tabs.length; i++) {
+              if (allURL.indexOf(tabs[i].url.toString()) !== -1) {
+                chrome.notifications.create({type:'basic', iconUrl:'https://68.media.tumblr.com/c7c539e52b98d5c3135cebb238b4d39d/tumblr_ot4abpNFfa1rwyec1o1_75sq.png', title:"Wish List", message:"One of your tabs contain your friend's wish"})
               }
+            }
           })
         })
         chrome.browserAction.onClicked.addListener(function(activeTab) {
