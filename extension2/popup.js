@@ -46,7 +46,9 @@ document.addEventListener('DOMContentLoaded', function(a) {
           name:tabs.title
         },
         success: function(res) {
-          alert(res.success)
+          if (res.success) {
+            alert("your wish has been saved!")
+          }
         }
       })
     }
