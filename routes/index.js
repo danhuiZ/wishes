@@ -47,7 +47,7 @@ routes.get('/:userId/friendList',(req,res)=> {
         friendList: found.friendsList,
         found: found,
         error: err,
-        wishes: found.giftList,
+        wishes: found.giftList.reverse(),
         selfPage:true,
         userId:req.params.userId
       })
@@ -65,7 +65,7 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
     // console.log("LOGGEDIN USER", foundSelf);
     User.findById(friendid).populate('giftList').exec((err, foundFriend)=> {
       res.render('wishList',{
-        wishes: foundFriend.giftList,
+        wishes: foundFriend.giftList.reverse(),
         found: foundSelf,
         friend: foundFriend,
         friendList: foundSelf.friendsList,
@@ -109,10 +109,21 @@ routes.post('/:userId/addWishList', (req, res) => {
 
 routes.post('/authenticate', (req,res)=> {
   const facebookid = req.cookies.facebookId;
-  console.log(facebookid);
-  User.findOne({facebookId:facebookid}).exec((err,saved)=> {
+  User.findOne({facebookId:facebookid}).populate('friendsList').exec((err,saved)=> {
     if (saved) {
-      res.json({facebookid:saved._id, name: saved.username});
+      const allPromise = [];
+      urlString = ""
+      saved.friendsList.forEach(id=> {
+        allPromise.push(Gift.findById(id));
+      });
+      Promise.all(allPromise)
+      .then(data=> {
+        data.forEach(obj=> {
+          urlString+="***"
+          urlString+=obj.purchaseUrl;
+        })
+      })
+      res.json({facebookid:saved._id, name: saved.username, urls:urlString});
     } else {
       res.json({facebookid:"", name:""})
     }
