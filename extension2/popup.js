@@ -11,14 +11,11 @@ document.addEventListener('DOMContentLoaded', function(a) {
     url:'https://ronchon-croissant-34901.herokuapp.com/authenticate',
     method:'post',
     success:function(data) {
-      alert(data)
       if (data.facebookid !== "") {
-        alert("logged")
         mongooseid = data.facebookid;
         allURL = [...data.urls];
         chrome.browserAction.setIcon({path: "color.png"});
         chrome.tabs.onUpdated.addListener(function(tab){
-          alert(Object.keys(data))
           chrome.tabs.getAllInWindow(null, function(tabs){
               for (var i = 0; i < tabs.length; i++) {
                 if (allURL.indexOf(tabs[i].url.toString()) !== -1) {
@@ -31,9 +28,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
           window.open('https://ronchon-croissant-34901.herokuapp.com/'+mongooseid+'/friendList');
         })
       } else {
-        alert('haven');
         chrome.browserAction.onClicked.addListener(function(activeTab) {
-          alert("clicking");
           window.open('https://ronchon-croissant-34901.herokuapp.com/');
         })
       }
@@ -41,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function(a) {
   })
 
   function onClickHandler(e,tabs) {
-    alert("clicked");
     if (e.mediaType === "image") {
       $.ajax({
         url:"https://ronchon-croissant-34901.herokuapp.com/"+mongooseid+"/addWishList",
