@@ -1420,6 +1420,12 @@ a {
   color: #EF5353;
   text-decoration: none;
 }
+
+.text-green {
+  colour: green !important; 
+  font-weight: bold;
+}
+
 a:hover, a:focus {
   color: #e11515;
   text-decoration: underline;
