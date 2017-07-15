@@ -17,9 +17,9 @@ routes.get('/login',(req,res)=> {
 routes.get('/:userId/friendList',(req,res)=> {
   User.findOne({_id:req.params.userId}).populate('friendsList').exec((err,found)=> {
     res.render('wishList',{
-      friendList:found.friendsList,
-      found:found,
-      error:err
+      friendList:f ound.friendsList,
+      found: found,
+      error: err
     })
   })
 });
