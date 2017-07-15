@@ -118,13 +118,8 @@ routes.post('/authenticate', (req,res)=> {
       });
       Promise.all(allPromise)
       .then(data=> {
-        data.forEach(obj=> {
-          urlString+="***";
-          urlString+=obj.purchaseUrl;
-        })
-        return urlString;
-      })
-      .then(urlString=> {
+        const urlArr = data.map(obj=>obj.purchaseUrl);
+        urlString = urlArr.join("***");
         res.json({facebookid:saved._id, name: saved.username, urls:urlString});
       })
     } else {
