@@ -26,6 +26,12 @@ routes.get('/mostpopular',(req,res)=> {
   res.render('mostpopular');
 });
 
+routes.get('/:userId/delete/:giftid',(req,res)=> {
+  Gift.findById(req.params.giftid).remove().exec((err,removed)=> {
+    res.redirect('/'+req.params.userId+'/friendList');
+  }
+})
+
 routes.get('/:userId/friendList',(req,res)=> {
   User.findOne({_id:req.params.userId}).populate('friendsList').populate('giftList').exec((err,found)=> {
     if (found) {
@@ -34,7 +40,8 @@ routes.get('/:userId/friendList',(req,res)=> {
         found: found,
         error: err,
         wishes: found.giftList,
-        selfPage:true
+        selfPage:true,
+        userId:req.params.userId
       })
     } else {
       res.send("userid not found")
