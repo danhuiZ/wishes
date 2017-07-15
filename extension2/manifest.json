@@ -3,7 +3,6 @@
   "version": "1.0",
   "description": "This plugin is showing how Facebook Connect/Graph API works on Chrome Extension.",
   "browser_action": {
-    "default_popup": "popup.html",
     "default_icon":"black.png"
   },
   "background":{

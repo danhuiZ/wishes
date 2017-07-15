@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
     url:'https://ronchon-croissant-34901.herokuapp.com/authenticate',
     method:'post',
     success:function(data) {
+      alert(data)
       if (data.facebookid !== "") {
         facebookid = data.facebookid;
         alert("you logged in as "+ data.name)
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
           window.open('https://ronchon-croissant-34901.herokuapp.com/'+data.facebookid+'/friendList');
         })
       } else {
+        alert("not logged in")
         let div = document.createElement('button');
         div.innerText="connect to facebook";
         div.setAttribute('id','connectFB');

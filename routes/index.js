@@ -71,7 +71,11 @@ routes.post('/:userId/addWishList', (req, res) => {
 routes.post('/authenticate', (req,res)=> {
   const facebookid = localStorage.getItem('facebookUser');
   User.findOne({facebookid:facebookid}).exec((err,saved)=> {
-    res.json({facebookid:facebookid || "", name: saved.username || ""});
+    if (saved) {
+      res.json({facebookid:facebookid, name: saved.username});
+    } else {
+      res.json({facebookid:"", name:""})
+    }
   })
 });
 
