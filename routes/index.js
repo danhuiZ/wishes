@@ -6,18 +6,6 @@ const User = models.User;
 const Gift = models.Gift;
 const routes = express();
 
-function foundAllids(facebookIdArr) {
-  const returnArr = [];
-  facebookIdArr.forEach(id=> {
-    User.findOne({facebookId:id}).exec((err,found)=> {
-      returnArr.push(found._id);
-      if (facebookIdArr.length === returnArr.length) {
-        return returnArr;
-      }
-    })
-  })
-}
-
 routes.get('/',(req,res)=> {
   res.render('mainpage');
 });
@@ -64,12 +52,11 @@ routes.post('/friendList',(req,res)=> {
       })
     } else {
       let c = found.friendsList || [];
-      let returnArr = [];
       let promiseArr = [];
       const mongooseidArr = req.body.friendList.split('/');
-      var forPromise = mongooseidArr.forEach(id=> {
+      mongooseidArr.forEach(id=> {
         promiseArr.push(User.findOne({facebookId:id}));
-      })
+      });
       Promise.all(promiseArr)
       .then((data)=> {
         found.friendsList = data.map(friend=>friend._id)
