@@ -46,10 +46,11 @@ document.addEventListener('DOMContentLoaded', function(a) {
 
   // Set up context menu tree at install time.
     chrome.runtime.onInstalled.addListener(function() {
-    chrome.contextMenus.create({"title": "Choose your wish list", "contexts": ["image"],"id": "parent"});
-    chrome.contextMenus.create({"title": "Save to public", "parentId": parent, "id": "picture", "onClick": onClickHandler});
-    chrome.contextMenus.create({"title": "Save to privacy", "parentId": parent, "id": "picture"});
+    var parent = chrome.contextMenus.create({"title": "Choose your wish list", "contexts": ["image"]});
+    chrome.contextMenus.create({"title": "Save to public", "parentId": parent, "contexts": ["image"],"onclick": onClickHandler});
+    chrome.contextMenus.create({"title": "Save to privacy", "contexts": ["image"],"parentId": parent});
+    chrome.contextMenus.create({"title": "Save to family", "contexts": ["image"],"parentId": parent});
+    chrome.contextMenus.create({"title": "Save to college friends", "contexts": ["image"],"parentId": parent});
     // chrome.contextMenus.onClicked.addListener(onClickHandler);
   });
-    });
-  });
+});
