@@ -20,5 +20,10 @@
     "cookies",
     "notifications",
     "https://*.68.media.tumblr.com/c7c539e52b98d5c3135cebb238b4d39d/tumblr_ot4abpNFfa1rwyec1o1_75sq.png/*"
-  ]
+  ],
+  "icons": {
+          "16": "16.png",
+          "48": "48.png",
+          "128": "128.png"
+        }
 }
