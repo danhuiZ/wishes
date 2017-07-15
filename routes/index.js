@@ -109,7 +109,7 @@ routes.post('/:userId/addWishList', (req, res) => {
 
 routes.post('/authenticate', (req,res)=> {
   const facebookid = req.cookies.facebookId;
-  User.findOne({facebookId:"495097640827106"}).populate('friendsList').exec((err,saved)=> {
+  User.findOne({facebookId:facebookid}).populate('friendsList').exec((err,saved)=> {
     if (saved) {
       const allPromise = [];
       urlString = "";
