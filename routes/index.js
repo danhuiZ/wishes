@@ -50,7 +50,7 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   })
 })
 
-routes.get('/:wishid/adopt', (req,res)=> {
+routes.get('/:userid/:wishid/adopt', (req,res)=> {
   const userid = req.userdata;
   const giftid = req.params.wishid;
   Gift.findById(giftid).exec((err,found)=> {
