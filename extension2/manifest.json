@@ -13,8 +13,9 @@
   "manifest_version":2,
   "permissions": [
     "tabs",
+    "contextMenus",
     "https://*.facebook.com/*",
-    "https://*.fathomless-retreat-40376.herokuapp.com/*",
+    "https://*.ronchon-croissant-34901.herokuapp.com/*",
     "https://*.cff1e058.ngrok.io/*"
   ]
 }
