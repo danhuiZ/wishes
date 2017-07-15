@@ -1,0 +1,20 @@
+{
+  "name": "Facebook Connect For Chrome Extension",
+  "version": "1.0",
+  "description": "This plugin is showing how Facebook Connect/Graph API works on Chrome Extension.",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon":"icon.png"
+  },
+  "background":{
+    "page":"popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://connect.facebook.net; object-src 'self'",
+  "manifest_version":2,
+  "permissions": [
+    "tabs",
+    "https://*.facebook.com/*",
+    "https://*.fathomless-retreat-40376.herokuapp.com/*",
+    "https://*.cff1e058.ngrok.io/*"
+  ]
+}
