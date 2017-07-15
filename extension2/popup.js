@@ -51,11 +51,13 @@ document.addEventListener('DOMContentLoaded', function(a) {
       alert(url);
     }
   };
-  
+
   // Set up context menu tree at install time.
   chrome.runtime.onInstalled.addListener(function() {
-    chrome.contextMenus.create({"title": "Save picture", "id": "picture"});
-    chrome.contextMenus.onClicked.addListener(onClickHandler);
+    chrome.contextMenus.create({"title": "Choose your wish list", "id": "parent"});
+    chrome.contextMenus.create({"title": "Save to public", "parentId": parent, "id": "picture", "onClick": onClickHandler});
+    chrome.contextMenus.create({"title": "Save to privacy", "parentId": parent, "id": "picture"});
+    // chrome.contextMenus.onClicked.addListener(onClickHandler);
   });
     // document.getElementById('onlyButton').addEventListener('click', function() {
     //   window.open('https://www.baidu.com')
