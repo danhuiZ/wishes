@@ -12,9 +12,8 @@ document.addEventListener('DOMContentLoaded', function(a) {
     success:function(data) {
       if (data.facebookid !== "") {
         facebookid = data.facebookid;
-        alert("yeah~~")
+        alert("you logged in as "+ data.name)
         chrome.browserAction.setIcon({path: "color.png"});
-        alert("notworking");
         let div = document.createElement('button');
         div.innerText="view wish list";
         div.setAttribute('id','viewWishList');
