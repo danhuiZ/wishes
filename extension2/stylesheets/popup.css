@@ -1,0 +1,16 @@
+body {
+  background-color: #eff2f7;
+}
+
+.logo {
+  display: block;
+  margin: auto;
+}
+
+.center  {
+  margin: auto;
+}
+
+.block {
+  display: block;
+}
