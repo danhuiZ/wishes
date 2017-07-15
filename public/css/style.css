@@ -7351,7 +7351,7 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
   color: #000;
-  font-family: "Rouge Script", cursive;
+  font-family: "Marck Script", cursive;
 }
 
 ::-webkit-selection {
@@ -7530,7 +7530,7 @@ h1, h2, h3, h4, h5, h6 {
   /*text-transform: uppercase;*/
   color: #000;
   font-weight: normal;
-  font-family: "Rouge Script", cursive;
+  font-family: "Marck Script", cursive;
 }
 #fh5co-header > .navbar li a > span .border {
   display: block;
@@ -7594,7 +7594,7 @@ h1, h2, h3, h4, h5, h6 {
   /*text-transform: uppercase;*/
   letter-spacing: 2px;
   font-size: 50px;
-  font-family: "Rouge Script", cursive;
+  font-family: "Marck Script", cursive;
   color: #000;
 }
 #fh5co-header .navbar-brand:hover {
@@ -7734,7 +7734,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 24px;
 }
 #fh5co-board .item .fh5co-item-title {
-  font-family: "Rouge Script", cursive;
+  font-family: "Marck Script", cursive;
   font-size: 17px;
   line-height: 24px;
   margin: 0;
@@ -7859,7 +7859,7 @@ pre {
   box-shadow: none !important;
   border: 2px solid #444;
   background: transparent;
-  font-family: "Rouge Script", cursive;
+  font-family: "Marck Script", cursive;
 }
 .form-control:hover, .form-control:focus, .form-control:active {
   outline: none;
@@ -7913,7 +7913,7 @@ pre {
   margin-bottom: 20px;
 }
 #fh5co-footer .fh5co-footer-logo {
-  font-family: "Rouge Script", cursive;
+  font-family: "Marck Script", cursive;
   font-size: 30px;
   color: #ccc;
   margin-bottom: 30px;
@@ -8256,13 +8256,14 @@ pre {
   margin-bottom: 30px;
   /*text-transform: uppercase;*/
   letter-spacing: 1px;
-  font-family: "Rouge Script", cursive;
+  font-family: "Marck Script", cursive;
 }
 .owl-carousel-fullwidth .item .fh5co-owl-text .fh5co-sub-lead {
   font-size: 30px;
   line-height: 42px;
   font-weight: 100;
-  font-family: "Roboto", arial, sans-serif;
+  /*font-family: "Roboto", arial, sans-serif;*/
+  font-family: 'Dancing Script', cursive;
 }
 
 .js .to-animate {
