@@ -55,8 +55,10 @@
 								<div class="container-flex">
 									<div class="text-center text-topmargin text-green">{{privacySetting}}Public</div>
 									<div class="fh5co-desc">{{name}}</div>
-									<a class="text-right text-rightpadding text-bottompadding" href={{purchaseUrl}}>Purchase Link</a>
-									<a class="text-right text-rightpadding text-bottompadding" href="/{{../userId}}/delete/{{_id}}">Delete item</a>
+									<div class="container-flex">
+										<a class="text-left text-leftpadding text-bottompadding" href={{purchaseUrl}}>Purchase Link</a>
+										<a class="text-right text-rightpadding text-bottompadding" href="/{{../userId}}/delete/{{_id}}">Delete item</a>
+									</div>
 								</div>
 							</div>
 						{{/each}}
@@ -70,12 +72,13 @@
 								<div class="container-flex">
 									<div class="fh5co-desc">{{name}}</div>
 									<!-- <a href={{purchaseUrl}}>PURCHASE HERE</a> -->
+									<div class="container-flex">
 										{{#if adopted}}
-											<div class="text-right text-bottompadding text-rightpadding">Adopted</div>
+											<div class="text-left text-leftpadding text-bottompadding text-green">Adopted</div>
 										{{else}}
-											<a class="text-center text-bottompadding text-green" href="/{{../friendId}}/{{_id}}/adopt">Adopt this gift</a>
+											<div class="text-left text-leftpadding text-bottompadding text-green" href="/{{../friendId}}/{{_id}}/adopt">Adopt this gift</div>
 										{{/if}}
-									<a class="text-right text-rightpadding text-bottompadding" href="#">Add to my wishlist</a>	
+									<a class="text-right text-rightpadding text-bottompadding" href="#">Add to my wishlist</a>									</div>
 								</div>
 							</div>
 						{{/each}}

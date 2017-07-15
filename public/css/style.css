@@ -1422,7 +1422,7 @@ a {
 }
 
 .text-green {
-  color: green !important; 
+  color: green !important;
   font-weight: bold;
 }
 
@@ -1638,6 +1638,10 @@ mark,
 
 .text-rightpadding {
   padding-right: 10px;
+}
+
+.text-leftpadding {
+  padding-left: 10px;
 }
 
 .text-bottompadding {
