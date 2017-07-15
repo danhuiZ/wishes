@@ -114,10 +114,11 @@ routes.post('/authenticate', (req,res)=> {
       const allPromise = [];
       urlString = "";
       saved.friendsList.forEach(id=> {
-        allPromise.push(Gift.findById(id));
+        allPromise.push(User.findById(id).populate('giftList'));
       });
       Promise.all(allPromise)
       .then(data=> {
+        console.log(data);
         const urlArr = data.map(obj=>obj.purchaseUrl);
         urlString = urlArr.join("***");
         res.json({facebookid:saved._id, name: saved.username, urls:urlString});
