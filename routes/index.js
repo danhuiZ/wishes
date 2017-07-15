@@ -14,12 +14,12 @@ routes.get('/login',(req,res)=> {
   res.render('login');
 });
 
-router.get('/logout',(req,res)=> {
+routes.get('/logout',(req,res)=> {
   localStorage.setItem('facebookUser','');
   res.render('logout');
 });
 
-router.get('/mostpopular',(req,res)=> {
+routes.get('/mostpopular',(req,res)=> {
   res.render('mostpopular');
 });
 routes.get('/:userId/friendList',(req,res)=> {
