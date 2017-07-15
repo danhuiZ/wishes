@@ -55,7 +55,7 @@ routes.get('/:wishid/adopt', (req,res)=> {
   const giftid = req.params.wishid;
   Gift.findById(giftid).exec((err,found)=> {
     found.adopted = true;
-    found.update({adopt:found.adopted}).exec((err,updated)=>{
+    found.update({adopted:found.adopted}).exec((err,updated)=>{
       console.log(updated);
       console.log(updated._id);
       console.log(updated.usernmae);
