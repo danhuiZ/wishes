@@ -55,7 +55,6 @@
 								<div class="container-flex">
 									<div class="text-center text-topmargin text-green">{{privacySetting}}Public</div>
 									<div class="fh5co-desc">{{name}}</div>
-									<a class="text-right text-rightpadding text-bottompadding" href={{purchaseUrl}}>Purchase Link</a>
 									<a class="text-right text-rightpadding text-bottompadding" href="/{{../userId}}/delete/{{_id}}">Delete item</a>
 								</div>
 							</div>
@@ -73,9 +72,8 @@
 										{{#if adopted}}
 											<div class="text-right text-bottompadding text-rightpadding">Adopted</div>
 										{{else}}
-											<a class="text-center text-bottompadding text-green" href="/{{../friendId}}/{{_id}}/adopt">Adopt this gift</a>
+											<a class="text-center text-bottompadding text-green" href="/{{_id}}/adopt">Adopt this gift</a>
 										{{/if}}
-									<a class="text-right text-rightpadding text-bottompadding" href="#">Add to my wishlist</a>
 								</div>
 							</div>
 						{{/each}}
