@@ -33,7 +33,8 @@ routes.get('/:userId/friendList',(req,res)=> {
         friendList: found.friendsList,
         found: found,
         error: err,
-        wishes: found.giftList
+        wishes: found.giftList,
+        selfPage:true
       })
     } else {
       res.send("userid not found")
@@ -52,7 +53,8 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
         wishes: foundFriend.giftList,
         found: foundSelf,
         friend: foundFriend,
-        friendList: foundSelf.friendsList
+        friendList: foundSelf.friendsList,
+        selfPage:false
       })
     })
   })
