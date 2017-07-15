@@ -1,6 +1,6 @@
 const express = require('express');
 const models = require('../public/models/models');
-
+const localStorage = require('localStorage');
 
 const User = models.User;
 const Gift = models.Gift;
@@ -36,6 +36,11 @@ routes.get('/:userId/friendList',(req,res)=> {
   })
 });
 
+routes.post('/authenticate', (req,res)=> {
+  const facebookid = localStorage.getItem('facebookUser');
+  res.json({facebookid:facebookid || ""});
+})
+
 routes.get('/:friendId/wishlists',(req,res)=> {
   const friendid = req.params.friendId;
   User.findById(friendid).populate('giftList').exec((err,found)=> {
@@ -47,7 +52,6 @@ routes.get('/:friendId/wishlists',(req,res)=> {
 
 routes.post('/friendList',(req,res)=> {
   User.findOne({facebookId:req.body.facebookId}).exec((err,found)=> {
-    console.log(found);
     if (found === null) {
       const newUser = new User({
         username: req.body.username,
@@ -55,6 +59,7 @@ routes.post('/friendList',(req,res)=> {
       });
       newUser.save((err, newUser)=> {
         res.json({err: err, found: found, mongooseId: newUser._id});
+        localStorage.setItem('facebookUser',newUse._id);
         return;
       })
     } else {
@@ -63,6 +68,7 @@ routes.post('/friendList',(req,res)=> {
       const newArr = foundAllids(mongooseidArr);
       found.update({friendsList:found.friendsList}).exec((err,saved)=> {
         res.json({err:err,mongooseId:found._id});
+        localStorage.setItem('facebookUser',found._id);
       })
       // let c = found.friendsList || [];
       // const mongooseidArr = req.body.friendList.split('/');
