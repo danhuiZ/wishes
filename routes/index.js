@@ -1,6 +1,6 @@
 const express = require('express');
 const models = require('../models/models');
-// const localStorage = require('localStorage');
+const localStorage = require('localStorage');
 
 const User = models.User;
 const Gift = models.Gift;
@@ -15,7 +15,7 @@ routes.get('/login',(req,res)=> {
 });
 
 routes.get('/logout',(req,res)=> {
-  req.userdata = "";
+  localStorage.setItem('facebookUser','');
   res.render('logout');
 });
 
@@ -51,16 +51,12 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
 })
 
 routes.get('/:wishid/adopt', (req,res)=> {
-  const userid = req.userdata;
+  const userid = localStorage.getItem('facebookUser');
   const giftid = req.params.wishid;
   Gift.findById(giftid).exec((err,found)=> {
     found.adopted = true;
-    found.update({adopted:found.adopted}).exec((err,updated)=>{
-      console.log(updated);
-      console.log(updated._id);
-      console.log(updated.usernmae);
-      console.log(userid);
-      res.redirect('/'+userid+'/friendList');
+    found.update({adopted:found.adopted}).exec((err,updated) {
+      res.redirect('/'+userid+'/friendList')
     })
   })
 })
@@ -85,7 +81,7 @@ routes.post('/:userId/addWishList', (req, res) => {
 })
 
 routes.post('/authenticate', (req,res)=> {
-  const facebookid = req.userdata;
+  const facebookid = localStorage.getItem('facebookUser');
   User.findOne({_id:facebookid}).exec((err,saved)=> {
     if (saved) {
       res.json({facebookid:facebookid, name: saved.username});
@@ -105,7 +101,7 @@ routes.post('/friendList',(req,res)=> {
       });
       newUser.save((err, newUser)=> {
         res.json({err: err, found: found, mongooseId: newUser._id});
-        req.user = newUser._id;
+        localStorage.setItem('facebookUser',newUse._id);
         return;
       })
     } else {
@@ -119,7 +115,7 @@ routes.post('/friendList',(req,res)=> {
       .then((data)=> {
         found.friendsList = data.map(friend=>friend._id)
         found.update({friendsList:found.friendsList}).exec((err,saved)=> {
-          req.user = saved._id;
+          localStorage.setItem('facebookUser',found._id);
           res.json({err:err,mongooseId:found._id});
           return;
         })
