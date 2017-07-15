@@ -1,5 +1,5 @@
 const express = require('express');
-const models = require('../public/models/models');
+const models = require('../models/models');
 const localStorage = require('localStorage');
 
 const User = models.User;
