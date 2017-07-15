@@ -54,7 +54,11 @@
         		</div>
 						<a href={{purchaseUrl}}>PURCHASE HERE</a>
         		<div class="fh5co-desc">{{name}}</div>
-						<a href="/{{_id}}">Adopt this gift</a>
+						{{#if adopted}}
+							<p>Adopted</p>
+						{{else}}
+							<a href="/{{_id}}/adopt">Adopt this gift</a>
+						{{/if}}
         	</div>
 					{{/each}}
 
@@ -140,9 +144,7 @@
         </div>
        </div>
 	</div>
-
 	<footer id="fh5co-footer">
-
 		<div class="container">
 			<div class="row row-padded">
 				<div class="col-md-12 text-center">
