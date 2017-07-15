@@ -16,7 +16,11 @@ const userSchema = mongoose.Schema({
 const giftSchema = mongoose.Schema({
   imgUrl: String,
   purchaseUrl: String,
-  name: String
+  name: String,
+  adopted: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const User = mongoose.model('User', userSchema);
