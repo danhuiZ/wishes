@@ -1,9 +1,3 @@
-// var express = require('express');
-// var exphbs = require('express-handler');
-//
-// var app = express();
-
-// app.get('/login',function(req,res) {
 document.addEventListener('DOMContentLoaded', function(a) {
   let allURL = [];
   let mongooseid = "";
@@ -60,6 +54,5 @@ document.addEventListener('DOMContentLoaded', function(a) {
     chrome.contextMenus.create({"title": "Save to privacy", "contexts": ["image"],"parentId": parent});
     chrome.contextMenus.create({"title": "Save to family", "contexts": ["image"],"parentId": parent});
     chrome.contextMenus.create({"title": "Save to college friends", "contexts": ["image"],"parentId": parent});
-  // chrome.contextMenus.onClicked.addListener(onClickHandler);
   });
 });

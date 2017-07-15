@@ -1,7 +1,7 @@
 {
-  "name": "Facebook Connect For Chrome Extension",
+  "name": "Deseo",
   "version": "1.0",
-  "description": "This plugin is showing how Facebook Connect/Graph API works on Chrome Extension.",
+  "description": "Help your friends understand you better",
   "browser_action": {
     "default_icon":"black.png"
   },
