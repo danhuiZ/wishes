@@ -90,7 +90,7 @@ routes.post('/authenticate', (req,res)=> {
   console.log(facebookid);
   User.findOne({facebookId:facebookid}).exec((err,saved)=> {
     if (saved) {
-      res.json({facebookid:facebookid, name: saved.username});
+      res.json({facebookid:saved._id, name: saved.username});
     } else {
       res.json({facebookid:"", name:""})
     }
