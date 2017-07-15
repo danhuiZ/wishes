@@ -7725,6 +7725,32 @@ h1, h2, h3, h4, h5, h6 {
             transition: all 200ms ease-out;
 }*/
 
+.purchase{
+	position:absolute;
+	top:112px;
+	left:50%;
+	margin-left:-85px;
+	border:2px solid #fff;
+	color:#fff;
+	font-size:19px;
+	text-align:center;
+	text-transform:uppercase;
+	font-weight:700;
+	padding:10px 0;
+	width:172px;
+	opacity:0;
+	-webkit-transition: all 200ms ease-out;
+       -moz-transition: all 200ms ease-out;
+         -o-transition: all 200ms ease-out;
+            transition: all 200ms ease-out;
+}
+.purchase:hover{
+	background:#fff;
+	color:#48cfad;
+	cursor:pointer;
+
+}
+
 #fh5co-board .item a {
   display: block;
 }
