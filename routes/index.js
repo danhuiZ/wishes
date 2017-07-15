@@ -22,6 +22,7 @@ routes.get('/logout',(req,res)=> {
 routes.get('/mostpopular',(req,res)=> {
   res.render('mostpopular');
 });
+
 routes.get('/:userId/friendList',(req,res)=> {
   User.findOne({_id:req.params.userId}).populate('friendsList').populate('giftList').exec((err,found)=> {
     res.render('wishList',{
@@ -70,7 +71,7 @@ routes.post('/:userId/addWishList', (req, res) => {
 
 routes.post('/authenticate', (req,res)=> {
   const facebookid = localStorage.getItem('facebookUser');
-  User.findOne({facebookid:facebookid}).exec((err,saved)=> {
+  User.findOne({_id:facebookid}).exec((err,saved)=> {
     if (saved) {
       res.json({facebookid:facebookid, name: saved.username});
     } else {

@@ -6,12 +6,16 @@
 // app.get('/login',function(req,res) {
 document.addEventListener('DOMContentLoaded', function(a) {
   let facebookid = "";
+
   $.ajax({
     url:'https://ronchon-croissant-34901.herokuapp.com/authenticate',
     method:'post',
     success:function(data) {
       alert(data)
       if (data.facebookid !== "") {
+        chrome.browserAction.onClicked.addEventListener(function(activeTab) {
+          window.open('https://ronchon-croissant-34901.herokuapp.com/'+data.facebookid+'/friendList');
+        })
         facebookid = data.facebookid;
         alert("you logged in as "+ data.name)
         chrome.browserAction.setIcon({path: "color.png"});
@@ -24,14 +28,18 @@ document.addEventListener('DOMContentLoaded', function(a) {
           window.open('https://ronchon-croissant-34901.herokuapp.com/'+data.facebookid+'/friendList');
         })
       } else {
-        alert("not logged in")
-        let div = document.createElement('button');
-        div.innerText="connect to facebook";
-        div.setAttribute('id','connectFB');
-        document.body.appendChild(div);
-        document.getElementById('connectFB').addEventListener('click',function() {
-          window.open('https://ronchon-croissant-34901.herokuapp.com');
+        alert('haven');
+        chrome.browserAction.onClicked.addListener(function(activeTab) {
+          alert("clicking");
+          window.open('https://ronchon-croissant-34901.herokuapp.com/');
         })
+        // alert("not logged in");
+        // let div = document.createElement('button');
+        // div.innerText="connect to facebook";
+        // div.setAttribute('id','connectFB');
+        // document.body.appendChild(div);
+        // document.getElementById('connectFB').addEventListener('click',function() {
+        // })
       }
     }
   })
