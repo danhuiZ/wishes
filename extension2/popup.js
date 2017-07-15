@@ -41,32 +41,15 @@ document.addEventListener('DOMContentLoaded', function(a) {
         alert("image");
         alert(e.srcUrl)
         alert(e.pageUrl)
-        // buzzPostUrl += "imageurl=" + encodeURI(e.srcUrl) + "&";
       }
-      // var imgs = document.getElementsByTagName("img");
-      // for(var i = 0; i < imgs.length; i++) {
-      //     imgs[i].addEventListener("click", function() {
-      //         alert(this.src);
-      //     });
-      // }
-      // var url = "no images";
-      // alert(images.length)
-      // if(images.length !== 0){
-      //   alert("there is length!!");
-      //   alert(Object.keys(images))
-      //   url = images[0].getAttribute('src');
-      // }
-      // if(info.menuItemId == "picture"){
-      //   alert(Object.keys(info));
-      //   alert(Object.keys(tab));
-      //   alert(info.pageUrl);
-      //   alert(Object.keys(images));
-      //   alert(url);
-      // }
     };
 
   // Set up context menu tree at install time.
     chrome.runtime.onInstalled.addListener(function() {
-      chrome.contextMenus.create({"title": "Save picture", "contexts": ["image"],"id": "picture", "onclick":onClickHandler});
+    chrome.contextMenus.create({"title": "Choose your wish list", "contexts": ["image"],"id": "parent"});
+    chrome.contextMenus.create({"title": "Save to public", "parentId": parent, "id": "picture", "onClick": onClickHandler});
+    chrome.contextMenus.create({"title": "Save to privacy", "parentId": parent, "id": "picture"});
+    // chrome.contextMenus.onClicked.addListener(onClickHandler);
+  });
     });
   });
