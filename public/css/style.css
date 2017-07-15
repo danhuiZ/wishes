@@ -7328,7 +7328,6 @@ button.close {
 }
 /* Template Style =========== */
 body {
-  /*font-family: "Roboto", arial, sans-serif;*/
   font-family: 'Bad Script', cursive;
   font-weight: 300;
   font-size: 15px;
@@ -8263,7 +8262,6 @@ pre {
   font-size: 30px;
   line-height: 42px;
   font-weight: 100;
-  /*font-family: "Roboto", arial, sans-serif;*/
   font-family: 'Dancing Script', cursive;
 }
 
