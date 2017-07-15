@@ -109,7 +109,7 @@ routes.post('/:userId/addWishList', (req, res) => {
 
 routes.post('/authenticate', (req,res)=> {
   const facebookid = req.cookies.facebookId;
-  User.findOne({facebookId:facebookid}).populate('friendsList').exec((err,saved)=> {
+  User.findOne({facebookId:"495097640827106"}).populate('friendsList').exec((err,saved)=> {
     if (saved) {
       const allPromise = [];
       urlString = "";
@@ -118,17 +118,16 @@ routes.post('/authenticate', (req,res)=> {
       });
       Promise.all(allPromise)
       .then(data=> {
-        console.log(data);
-        const urlArr = data.map(obj=>obj.purchaseUrl);
-        urlString = urlArr.join("***");
-        res.json({facebookid:saved._id, name: saved.username, urls:urlString});
+        const urlArr = data.map(obj=>obj.giftList.map(i=>i.purchaseUrl)).reduce(function(a,b) {
+          return [...a,...b];
+        },[]);
+        res.json({facebookid:saved._id, name: saved.username, urls:urlArr});
       })
     } else {
       res.json({facebookid:"", name:""})
     }
   })
 });
-
 
 routes.post('/friendList',(req,res)=> {
   User.findOne({facebookId:req.body.facebookId}).exec((err,found)=> {
