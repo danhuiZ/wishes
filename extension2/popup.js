@@ -11,13 +11,12 @@ document.addEventListener('DOMContentLoaded', function(a) {
     url:'https://ronchon-croissant-34901.herokuapp.com/authenticate',
     method:'post',
     success:function(data) {
-      alert(data)
       if (data.facebookid !== "") {
         mongooseid = data.facebookid;
         allURL = data.urls.split('***');
-        alert("you logged in as "+ data.name)
         chrome.browserAction.setIcon({path: "color.png"});
         chrome.tabs.onUpdated.addListener(function(tab){
+          alert(Object.keys(data))
           chrome.tabs.getAllInWindow(null, function(tabs){
               for (var i = 0; i < tabs.length; i++) {
                 if (allURL.indexOf(tabs[i].url.toString()) !== -1) {

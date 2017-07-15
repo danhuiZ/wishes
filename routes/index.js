@@ -112,18 +112,20 @@ routes.post('/authenticate', (req,res)=> {
   User.findOne({facebookId:facebookid}).populate('friendsList').exec((err,saved)=> {
     if (saved) {
       const allPromise = [];
-      urlString = ""
+      urlString = "";
       saved.friendsList.forEach(id=> {
         allPromise.push(Gift.findById(id));
       });
       Promise.all(allPromise)
       .then(data=> {
         data.forEach(obj=> {
-          urlString+="***"
+          urlString+="***";
           urlString+=obj.purchaseUrl;
         })
       })
-      res.json({facebookid:saved._id, name: saved.username, urls:urlString});
+      .then(res=> {
+        res.json({facebookid:saved._id, name: saved.username, urls:urlString});
+      })
     } else {
       res.json({facebookid:"", name:""})
     }
