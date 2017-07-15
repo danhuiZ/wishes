@@ -50,6 +50,17 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   })
 })
 
+routes.get('/:wishid/adopt', (req,res)=> {
+  const userid = localStorage.getItem('facebookUser');
+  const giftid = req.params.wishid;
+  Gift.findById(giftid).exec((err,found)=> {
+    found.adopted = true;
+    found.update({adopted:found.adopted}).exec((err,updated)=>{
+      res.redirect('/'+userid+'/friendList')
+    })
+  })
+})
+
 routes.post('/:userId/addWishList', (req, res) => {
   const userId = req.params.userId;
   const newGift = new Gift({

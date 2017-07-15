@@ -6,7 +6,6 @@
 // app.get('/login',function(req,res) {
 document.addEventListener('DOMContentLoaded', function(a) {
   let facebookid = "";
-
   $.ajax({
     url:'https://ronchon-croissant-34901.herokuapp.com/authenticate',
     method:'post',
