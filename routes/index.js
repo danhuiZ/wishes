@@ -11,9 +11,11 @@ function foundAllids(facebookIdArr) {
   facebookIdArr.forEach(id=> {
     User.findOne({facebookId:id}).exec((err,found)=> {
       returnArr.push(found._id);
+      if (facebookIdArr.length === returnArr.length) {
+        return returnArr;
+      }
     })
   })
-  return returnArr;
 }
 
 routes.get('/',(req,res)=> {
@@ -25,9 +27,7 @@ routes.get('/login',(req,res)=> {
 });
 
 routes.get('/:userId/friendList',(req,res)=> {
-  console.log("found");
   User.findOne({_id:req.params.userId}).populate('friendsList').exec((err,found)=> {
-    console.log(found.friendsList);
     res.render('friendList',{
       friendList:found.friendsList,
       found:found,
@@ -64,12 +64,29 @@ routes.post('/friendList',(req,res)=> {
       })
     } else {
       let c = found.friendsList || [];
+      let returnArr = [];
+      let promiseArr = [];
       const mongooseidArr = req.body.friendList.split('/');
-      const newArr = foundAllids(mongooseidArr);
-      found.update({friendsList:found.friendsList}).exec((err,saved)=> {
-        res.json({err:err,mongooseId:found._id});
-        localStorage.setItem('facebookUser',found._id);
+      var forPromise = mongooseidArr.forEach(id=> {
+        promiseArr.push(User.findOne({facebookId:id}));
       })
+      Promise.all(promiseArr)
+      .then((data)=> {
+        found.friendsList = data.map(friend=>friend._id)
+        found.update({friendsList:found.friendsList}).exec((err,saved)=> {
+          localStorage.setItem('facebookUser',found._id);
+          res.json({err:err,mongooseId:found._id});
+          return;
+        })
+      })
+      // while(! newArr) {
+      //   newArr = foundAllids(mongooseidArr);
+      // }
+      // found.update({friendsList:found.friendsList}).exec((err,saved)=> {
+      //   res.json({err:err,mongooseId:found._id});
+      //   localStorage.setItem('facebookUser',found._id);
+      //   return;
+      // })
       // let c = found.friendsList || [];
       // const mongooseidArr = req.body.friendList.split('/');
       // for (let i=0;i < mongooseidArr.length;i++) {
