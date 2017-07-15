@@ -76,7 +76,7 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   })
 })
 
-routes.get('/:userId/:friendId/:wishid/adopt', (req,res)=> {
+routes.get('/:friendId/:wishid/adopt', (req,res)=> {
   const userid = req.cookies.facebookId;
   const friendId = req.params.friendId;
   const giftid = req.params.wishid;
