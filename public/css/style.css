@@ -4797,7 +4797,7 @@ tbody.collapse.in {
   text-decoration: none;
 }
 .navbar-brand > img {
-  display: block;
+  /*display: block;*/
 }
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
@@ -7587,7 +7587,7 @@ h1, h2, h3, h4, h5, h6 {
 #fh5co-header .navbar-brand {
   text-align: center;
   font-weight: bold;
-  display: block;
+  /*display: block;*/
   float: none !important;
   width: 200px;
   margin: 0 auto;

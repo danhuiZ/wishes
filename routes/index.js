@@ -14,15 +14,40 @@ routes.get('/login',(req,res)=> {
   res.render('login');
 });
 
+routes.get('/logout',(req,res)=> {
+  localStorage.setItem('facebookUser','');
+  res.render('logout');
+});
+
+routes.get('/mostpopular',(req,res)=> {
+  res.render('mostpopular');
+});
 routes.get('/:userId/friendList',(req,res)=> {
-  User.findOne({_id:req.params.userId}).populate('friendsList').exec((err,found)=> {
+  User.findOne({_id:req.params.userId}).populate('friendsList').populate('giftList').exec((err,found)=> {
     res.render('wishList',{
-      friendList:found.friendsList,
-      found:found,
-      error:err
+      friendList: found.friendsList,
+      found: found,
+      error: err,
+      wishes: found.giftList
     })
   })
 });
+
+routes.get('/:userId/:friendId/wishlists', (req,res)=> {
+  const selfId = req.params.userId;
+  const friendid = req.params.friendId;
+  User.findById(selfId).populate('friendsList').exec((err, foundSelf)=> {
+    // console.log("LOGGEDIN USER", foundSelf);
+    User.findById(friendid).populate('giftList').exec((err, foundFriend)=> {
+      res.render('wishList',{
+        wishes: foundFriend.giftList,
+        found: foundSelf,
+        friend: foundFriend,
+        friendList: foundSelf.friendsList
+      })
+    })
+  })
+})
 
 routes.post('/:userId/addWishList', (req, res) => {
   const userId = req.params.userId;
@@ -45,21 +70,11 @@ routes.post('/:userId/addWishList', (req, res) => {
 
 routes.post('/authenticate', (req,res)=> {
   const facebookid = localStorage.getItem('facebookUser');
-  res.json({facebookid:facebookid || ""});
-})
-
-routes.get('/:userId/:friendId/wishlists',(req,res)=> {
-  const selfId = req.params.userId;
-  const friendid = req.params.friendId;
-  User.findById(selfId).exec((err, foundSelf)=> {
-    User.findById(friendid).populate('giftList').exec((err, found)=> {
-      res.render('wishList',{
-        wishes:found.giftList,
-        loggedinUser: foundSelf
-      })
-    })
+  User.findOne({facebookid:facebookid}).exec((err,saved)=> {
+    res.json({facebookid:facebookid || "", name: saved.username || ""});
   })
-})
+});
+
 
 routes.post('/friendList',(req,res)=> {
   User.findOne({facebookId:req.body.facebookId}).exec((err,found)=> {

@@ -9,12 +9,11 @@ document.addEventListener('DOMContentLoaded', function(a) {
   $.ajax({
     url:'https://ronchon-croissant-34901.herokuapp.com/authenticate',
     method:'post',
-    success:function(data) { 
+    success:function(data) {
       if (data.facebookid !== "") {
         facebookid = data.facebookid;
-        alert("yeah~~")
-        chrome.browserAction.setIcon({path: "IMG_0017.png"});
-        alert("notworking");
+        alert("you logged in as "+ data.name)
+        chrome.browserAction.setIcon({path: "color.png"});
         let div = document.createElement('button');
         div.innerText="view wish list";
         div.setAttribute('id','viewWishList');
