@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
       if (data.facebookid !== "") {
         alert("logged")
         mongooseid = data.facebookid;
-        allURL = data.urls.split('***');
+        allURL = [...data.urls];
         chrome.browserAction.setIcon({path: "color.png"});
         chrome.tabs.onUpdated.addListener(function(tab){
           alert(Object.keys(data))
