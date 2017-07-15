@@ -13,20 +13,13 @@ document.addEventListener('DOMContentLoaded', function(a) {
     success:function(data) {
       alert(data)
       if (data.facebookid !== "") {
-        chrome.browserAction.onClicked.addEventListener(function(activeTab) {
+        alert("logged in")
+        chrome.browserAction.onClicked.addListener(function(activeTab) {
           window.open('https://ronchon-croissant-34901.herokuapp.com/'+data.facebookid+'/friendList');
         })
         facebookid = data.facebookid;
         alert("you logged in as "+ data.name)
         chrome.browserAction.setIcon({path: "color.png"});
-        let div = document.createElement('button');
-        div.innerText="view wish list";
-        div.setAttribute('id','viewWishList');
-        document.body.appendChild(div);
-      // Set up context menu tree at isstall time.
-        document.getElementById('viewWishList').addEventListener('click',function() {
-          window.open('https://ronchon-croissant-34901.herokuapp.com/'+data.facebookid+'/friendList');
-        })
       } else {
         alert('haven');
         chrome.browserAction.onClicked.addListener(function(activeTab) {
