@@ -82,7 +82,7 @@ routes.get('/:wishid/adopt', (req,res)=> {
     found.adopted = true;
     found.update({adopted:found.adopted}).exec((err,updated)=>{
       User.findOne({facebookId:userid}).exec((err,foundUser)=> {
-        res.redirect('/'+foundUser._id +'/wishlists');
+        res.redirect('/'+foundUser._id +'/friendList');
       })
     })
   })
