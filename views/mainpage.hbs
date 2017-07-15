@@ -8,7 +8,68 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div> -->
 
-
+<!--
 <form action="/login">
   <button type="submit" id="loginButton">login with facebook</button>
-</form>
+</form> -->
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<style>
+  body {
+    background-color: #eff2f7;
+  }
+  .container-fluid {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .logo {
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+  }
+  .button {
+    margin-top: 60px;
+    justify-content: center;
+    align-items: center;
+  }
+  #logo {
+    height: 342px;
+    width: 639px;
+    margin: 10px;
+    margin-bottom: 0;
+  }
+  #loginButton {
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    justify-content: center;
+    height: 60px;
+    width: 230px;
+  }
+  .description {
+    justify-content: center;
+    align-items: center;
+  }
+  .text {
+    font-family: "Arial";
+    font-size: 150%;
+    color: #9a9ca0;
+  }
+
+
+</style>
+
+
+<div class="container-fluid">
+    <div class='logo'>
+      <img src="https://68.media.tumblr.com/8ac000ee98072140f25c55a710b67b27/tumblr_ot3mhrMds11rwyec1o1_1280.png" id='logo'/>
+    </div>
+    <div class='description'>
+      <p class='text'>This is a short description about our website so that it will look very cool and fashionable to our users</p>
+    </div>
+    <form action="/login" class='button'>
+      <button type="submit" class="btn btn-primary btn-lg" id="loginButton">login with facebook</button>
+    </form>
+</div>
