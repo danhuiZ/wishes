@@ -1949,6 +1949,11 @@ pre code {
   overflow-y: scroll;
 }
 
+.container-flex {
+  display: flex;
+  flex-direction: row;
+}
+
 .container {
   margin-right: auto;
   margin-left: auto;

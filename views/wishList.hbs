@@ -52,9 +52,11 @@
 								<div class="animate-box">
 									<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
 								</div>
-								<div class="fh5co-desc">{{name}}</div>
-								<a class="text-right text-topmargin text-rightpadding text-bottompadding" href="/{{../userId}}/delete/{{_id}}">Delete item</a>
+								<div class="container-flex">
+									<div class="fh5co-desc">{{name}}</div>
+									<a class="text-right text-topmargin text-rightpadding text-bottompadding" href="/{{../userId}}/delete/{{_id}}">Delete item</a>
 								</div>
+							</div>
 						{{/each}}
 					{{else}}
 						{{#each wishes}}
