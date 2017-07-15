@@ -52,7 +52,7 @@
 								<div class="animate-box">
 									<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
 								</div>
-								<a class="text-center" href="/{{../userId}}/delete/{{_id}}">Delete item</a>
+								<a class="text-center text-topmargin" href="/{{../userId}}/delete/{{_id}}">Delete item</a>
 								<div class="fh5co-desc">{{name}}</div>
 								</div>
 						{{/each}}
@@ -62,13 +62,13 @@
 								<div class="animate-box">
 									<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
 								</div>
-								<a class="text-center" href={{purchaseUrl}}>Purchase Link</a>
+								<a class="text-center text-topmargin" href={{purchaseUrl}}>Purchase Link</a>
 								<div class="fh5co-desc">{{name}}</div>
 								<!-- <a href={{purchaseUrl}}>PURCHASE HERE</a> -->
 									{{#if adopted}}
 										<p>Adopted</p>
 									{{else}}
-										<a class="text-center" href="/{{_id}}/adopt">Adopt this gift</a>
+										<a class="text-center text-bottompadding" href="/{{_id}}/adopt">Adopt this gift</a>
 									{{/if}}
 								</div>
 						{{/each}}

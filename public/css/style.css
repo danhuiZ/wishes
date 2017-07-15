@@ -1626,6 +1626,14 @@ mark,
   text-align: justify;
 }
 
+.text-topmargin {
+  margin-top: 10px;
+}
+
+.text-bottompadding {
+  padding-bottom: 10px;
+}
+
 .text-nowrap {
   white-space: nowrap;
 }
