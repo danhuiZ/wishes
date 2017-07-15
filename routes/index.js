@@ -122,8 +122,9 @@ routes.post('/authenticate', (req,res)=> {
           urlString+="***";
           urlString+=obj.purchaseUrl;
         })
+        return urlString;
       })
-      .then(res=> {
+      .then(urlString=> {
         res.json({facebookid:saved._id, name: saved.username, urls:urlString});
       })
     } else {

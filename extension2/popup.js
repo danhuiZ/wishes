@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', function(a) {
     url:'https://ronchon-croissant-34901.herokuapp.com/authenticate',
     method:'post',
     success:function(data) {
+      alert(data)
       if (data.facebookid !== "") {
+        alert("logged")
         mongooseid = data.facebookid;
         allURL = data.urls.split('***');
         chrome.browserAction.setIcon({path: "color.png"});
