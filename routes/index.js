@@ -48,10 +48,10 @@ routes.post('/authenticate', (req,res)=> {
   res.json({facebookid:facebookid || ""});
 })
 
-routes.get('/:userId/:friendId/wishlists',(req,res)=> {
+routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   const selfId = req.params.userId;
   const friendid = req.params.friendId;
-  User.findById(selfId, function (err, foundSelf) {
+  User.findById(selfId, function(err, foundSelf) {
     console.log("LOGGEDIN USER", foundSelf);
     User.findById(friendid).populate('giftList').exec((err, found)=> {
       res.render('wishList',{
