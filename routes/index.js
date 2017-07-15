@@ -69,20 +69,22 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
         found: foundSelf,
         friend: foundFriend,
         friendList: foundSelf.friendsList,
-        selfPage:false
+        selfPage:false,
+        friendId:req.params.friendId
       })
     })
   })
 })
 
-routes.get('/:wishid/adopt', (req,res)=> {
+routes.get('/:userId/:friendId/:wishid/adopt', (req,res)=> {
   const userid = req.cookies.facebookId;
+  const friendId = req.params.friendId;
   const giftid = req.params.wishid;
   Gift.findById(giftid).exec((err,found)=> {
     found.adopted = true;
     found.update({adopted:found.adopted}).exec((err,updated)=>{
       User.findOne({facebookId:userid}).exec((err,foundUser)=> {
-        res.redirect('/'+foundUser._id +'/friendList')
+        res.redirect('/'+foundUser._id +friendId+'/wishlists');
       })
     })
   })
