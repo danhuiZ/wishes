@@ -45,7 +45,7 @@ routes.post('/:userId/addWishList', (req, res) => {
 
 routes.post('/authenticate', (req,res)=> {
   const facebookid = localStorage.getItem('facebookUser');
-  res.json({facebookid:facebookid || ""});
+  res.json({facebookid: facebookid || ""});
 })
 
 routes.get('/:userId/:friendId/wishlists', (req,res)=> {
@@ -55,7 +55,8 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
     console.log("LOGGEDIN USER", foundSelf);
     User.findById(friendid).populate('giftList').exec((err, found)=> {
       res.render('wishList',{
-        wishes:found.giftList,
+        wishes: found.giftList,
+        friend: found,
         loggedinUser: foundSelf
       })
     })
