@@ -29,8 +29,7 @@ routes.get('/mostpopular',(req,res)=> {
 routes.get('/:userId/delete/:giftid',(req,res)=> {
   Gift.findById(req.params.giftid).remove().exec((err,removed)=> {
     User.findById(req.params.userId).exec((err,foundUser)=> {
-      const giftArr = [...foundUser.giftList];
-      giftArr = foundUser.giftList.filter(a=> {
+      const giftArr = foundUser.giftList.filter(a=> {
         return a.toString() !== req.params.giftid;
       });
       foundUser.giftList = giftArr;
