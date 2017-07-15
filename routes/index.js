@@ -115,7 +115,7 @@ routes.post('/friendList',(req,res)=> {
       .then((data)=> {
         found.friendsList = data.map(friend=>friend._id)
         found.update({friendsList:found.friendsList}).exec((err,saved)=> {
-          req.user = newUser._id;
+          req.user = saved._id;
           res.json({err:err,mongooseId:found._id});
           return;
         })
