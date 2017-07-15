@@ -24,6 +24,22 @@ routes.get('/:userId/friendList',(req,res)=> {
   })
 });
 
+routes.get('/:userId/:friendId/wishlists', (req,res)=> {
+  const selfId = req.params.userId;
+  const friendid = req.params.friendId;
+  User.findById(selfId, function(err, foundSelf) {
+    console.log("LOGGEDIN USER", foundSelf);
+    User.findById(friendid).populate('giftList').exec((err, found)=> {
+      res.render('wishList',{
+        wishes: found.giftList,
+        found: foundSelf,
+        friend: found,
+        friendList: foundSelf.friendsList
+      })
+    })
+  })
+})
+
 routes.post('/:userId/addWishList', (req, res) => {
   const userId = req.params.userId;
   const newGift = new Gift({
@@ -48,16 +64,7 @@ routes.post('/authenticate', (req,res)=> {
   User.findOne({facebookid:facebookid}).exec((err,saved)=> {
     res.json({facebookid:facebookid || "", name:saved.username});
   })
-})
 
-routes.get('/:friendId/wishlists',(req,res)=> {
-  const friendid = req.params.friendId;
-  User.findById(friendid).populate('giftList').exec((err,found)=> {
-    res.render('wishList',{
-      wishes:found.giftList
-    })
-  })
-})
 
 routes.post('/friendList',(req,res)=> {
   User.findOne({facebookId:req.body.facebookId}).exec((err,found)=> {
