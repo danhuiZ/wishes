@@ -17,6 +17,8 @@
     "https://*.ronchon-croissant-34901.herokuapp.com/*",
     "https://*.cff1e058.ngrok.io/*",
     "activeTab",
-    "cookies"
+    "cookies",
+    "notifications",
+    "https://*.68.media.tumblr.com/c7c539e52b98d5c3135cebb238b4d39d/tumblr_ot4abpNFfa1rwyec1o1_75sq.png/*"
   ]
 }
