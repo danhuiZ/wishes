@@ -15,7 +15,8 @@ const userSchema = mongoose.Schema({
 
 const giftSchema = mongoose.Schema({
   imgUrl: String,
-  purchaseUrl: String
+  purchaseUrl: String,
+  name: String
 })
 
 const User = mongoose.model('User', userSchema);
