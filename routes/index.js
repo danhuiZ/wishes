@@ -56,6 +56,10 @@ routes.get('/:wishid/adopt', (req,res)=> {
   Gift.findById(giftid).exec((err,found)=> {
     found.adopted = true;
     found.update({adopt:found.adopted}).exec((err,updated)=>{
+      console.log(updated);
+      console.log(updated._id);
+      console.log(updated.usernmae);
+      console.log(userid);
       res.redirect('/'+userid+'/friendList');
     })
   })
