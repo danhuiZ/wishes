@@ -1,10 +1,10 @@
 <!-- side-bar -->
 	<div id="fh5co-offcanvass">
 		<a href="#" class="fh5co-offcanvass-close js-fh5co-offcanvass-close"><i class="icon-cross"></i> </a>
-		<h1 class="fh5co-logo"><a class="navbar-brand" href="wishList.hbs">{{loggedinUser}}'s friends' wishlists</a></h1>
+		<h1 class="fh5co-logo"><a class="navbar-brand" href="wishList.hbs">{{loggedinUser.username}}'s friends' wishlists</a></h1>
 		<ul>
 			{{#each friendList}}
-				<li><a href="/{{loggedinUser}}/{{_id}}/wishlists">{{username}}</a></li>
+				<li><a href="/{{loggedinUser._id}}/{{_id}}/wishlists">{{username}}</a></li>
 			{{/each}}
 			<!-- <li><a href="about.html">Daniel</a></li>
 			<li><a href="pricing.html">Jason</a></li>
@@ -47,7 +47,7 @@
 	        		<a href=wishes.imgUrl class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Free HTML5 Bootstrap template"></a>
         		</div>
 						<a href={{purchaseUrl}}>PURCHASE HERE</a>
-        		<div class="fh5co-desc">Product description</div>
+        		<div class="fh5co-desc">{{name}}</div>
         	</div>
 					{{/each}}
 
