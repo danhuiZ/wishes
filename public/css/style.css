@@ -7328,7 +7328,8 @@ button.close {
 }
 /* Template Style =========== */
 body {
-  font-family: "Roboto", arial, sans-serif;
+  /*font-family: "Roboto", arial, sans-serif;*/
+  font-family: 'Bad Script', cursive;
   font-weight: 300;
   font-size: 15px;
   line-height: 26px;
