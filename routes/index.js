@@ -28,12 +28,17 @@ routes.get('/mostpopular',(req,res)=> {
 
 routes.get('/:userId/friendList',(req,res)=> {
   User.findOne({_id:req.params.userId}).populate('friendsList').populate('giftList').exec((err,found)=> {
-    res.render('wishList',{
-      friendList: found.friendsList,
-      found: found,
-      error: err,
-      wishes: found.giftList
-    })
+    if (found) {
+      res.render('wishList',{
+        friendList: found.friendsList,
+        found: found,
+        error: err,
+        wishes: found.giftList
+      })
+    } else {
+      res.send("userid not found")
+    }
+
   })
 });
 
