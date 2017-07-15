@@ -1630,6 +1630,10 @@ mark,
   margin-top: 10px;
 }
 
+.text-toppadding {
+  padding-top: 10px;
+}
+
 .text-bottompadding {
   padding-bottom: 10px;
 }
