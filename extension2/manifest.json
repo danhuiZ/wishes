@@ -15,6 +15,7 @@
     "contextMenus",
     "https://*.facebook.com/*",
     "https://*.ronchon-croissant-34901.herokuapp.com/*",
-    "https://*.cff1e058.ngrok.io/*"
+    "https://*.cff1e058.ngrok.io/*",
+    "activeTab"
   ]
 }
