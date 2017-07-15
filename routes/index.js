@@ -56,7 +56,9 @@ routes.get('/:wishid/adopt', (req,res)=> {
   Gift.findById(giftid).exec((err,found)=> {
     found.adopted = true;
     found.update({adopted:found.adopted}).exec((err,updated)=>{
-      res.redirect('/'+userid+'/friendList')
+      User.findOne({facebookId:userid}).exec((err,foundUser)=> {
+        res.redirect('/'+foundUser._id +'/friendList')
+      })
     })
   })
 })
