@@ -1,7 +1,7 @@
 <!-- side-bar -->
 	<div id="fh5co-offcanvass">
 		<a href="#" class="fh5co-offcanvass-close js-fh5co-offcanvass-close"><i class="icon-cross"></i> </a>
-		<h1 class="fh5co-logo"><a class="navbar-brand" href="wishList.hbs">{{found.username}}'s friends' wishlists</a></h1>
+		<h1 class="fh5co-logo"><a class="navbar-brand" href="/{{found._id}}/friendList">{{found.username}}'s friends' wishlists</a></h1>
 		<ul>
 			{{#each friendList}}
 				<li><a href="/{{../found._id}}/{{_id}}/wishlists">{{username}}</a></li>
