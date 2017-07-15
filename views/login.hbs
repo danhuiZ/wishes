@@ -40,7 +40,7 @@ console.log("in script");
              success: function(res) {
                console.log("success");
                console.log(res)
-               window.top.location = "https://cff1e058.ngrok.io/"+res.mongooseId+"/friendList"; //redirect to friendlist page
+               window.top.location = "https://ronchon-croissant-34901.herokuapp.com/"+res.mongooseId+"/friendList"; //redirect to friendlist page
              },
              error: function(res) {
                alert(res)
@@ -50,7 +50,7 @@ console.log("in script");
        })
       } else {
        alert('User cancelled login or did not fully authorize.');
-       window.top.location = "https://cff1e058.ngrok.io" //redirect to mainpage
+       window.top.location = "https://ronchon-croissant-34901.herokuapp.com" //redirect to mainpage
       }
     },{scope:'email,user_friends,public_profile'});
   };

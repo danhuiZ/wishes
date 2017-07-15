@@ -5,7 +5,6 @@
 
 // app.get('/login',function(req,res) {
 document.addEventListener('DOMContentLoaded', function(a) {
-    console.log("loading");
     $.ajax({
       url:'https://cff1e058.ngrok.io/authenticate',
       method:'post',
@@ -29,6 +28,35 @@ document.addEventListener('DOMContentLoaded', function(a) {
         }
       }
     })
+    var imgs = document.getElementsByTagName("img");
+    for(var i = 0; i < imgs.length; i++) {
+        imgs[i].addEventListener("click", function() {
+            alert(this.src);
+        });
+    }
+  function onClickHandler(info, tab) {
+    var images = document.getElementsByTagName('img')//[0].getAttribute('src');
+    var url = "no images";
+    alert(images.length)
+    if(images.length !== 0){
+      alert("there is length!!");
+      alert(Object.keys(images))
+      url = images[0].getAttribute('src');
+    }
+    if(info.menuItemId == "picture"){
+      alert(Object.keys(info));
+      alert(Object.keys(tab));
+      alert(info.pageUrl);
+      alert(Object.keys(images));
+      alert(url);
+    }
+  };
+  
+  // Set up context menu tree at install time.
+  chrome.runtime.onInstalled.addListener(function() {
+    chrome.contextMenus.create({"title": "Save picture", "id": "picture"});
+    chrome.contextMenus.onClicked.addListener(onClickHandler);
+  });
     // document.getElementById('onlyButton').addEventListener('click', function() {
     //   window.open('https://www.baidu.com')
     //   })
