@@ -14,12 +14,21 @@ routes.get('/login',(req,res)=> {
   res.render('login');
 });
 
+router.get('/logout',(req,res)=> {
+  localStorage.setItem('facebookUser','');
+  res.render('logout');
+});
+
+router.get('/mostpopular',(req,res)=> {
+  res.render('mostpopular');
+});
 routes.get('/:userId/friendList',(req,res)=> {
-  User.findOne({_id:req.params.userId}).populate('friendsList').exec((err,found)=> {
+  User.findOne({_id:req.params.userId}).populate('friendsList').populate('giftList').exec((err,found)=> {
     res.render('wishList',{
       friendList: found.friendsList,
       found: found,
-      error: err
+      error: err,
+      wishes: found.giftList
     })
   })
 });
