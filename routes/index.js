@@ -29,8 +29,8 @@ routes.get('/mostpopular',(req,res)=> {
 routes.get('/:userId/delete/:giftid',(req,res)=> {
   Gift.findById(req.params.giftid).remove().exec((err,removed)=> {
     res.redirect('/'+req.params.userId+'/friendList');
-  }
-})
+  });
+});
 
 routes.get('/:userId/friendList',(req,res)=> {
   User.findOne({_id:req.params.userId}).populate('friendsList').populate('giftList').exec((err,found)=> {
