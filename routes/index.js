@@ -15,7 +15,10 @@ routes.get('/login',(req,res)=> {
 });
 
 routes.get('/logout',(req,res)=> {
+  console.log("before logout");
+  console.log(req.cookies.facebookId);
   res.clearCookie('facebookId',{domain:'.ronchon-croissant-34901.herokuapp.com'});
+  console.log("after");
   res.render('logout');
 });
 
@@ -84,6 +87,7 @@ routes.post('/:userId/addWishList', (req, res) => {
 
 routes.post('/authenticate', (req,res)=> {
   const facebookid = req.cookies.facebookId;
+  console.log(facebookid);
   User.findOne({facebookId:facebookid}).exec((err,saved)=> {
     if (saved) {
       res.json({facebookid:facebookid, name: saved.username});
