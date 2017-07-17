@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
         },
         success: function(res) {
           if (res.success) {
-            alert("your wish has been saved!")
+            alert("Your wish has been saved!")
           }
         }
       })
