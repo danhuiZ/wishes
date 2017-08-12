@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
   let allURL = [];
   let mongooseid = "";
   $.ajax({
-    url:'https://ronchon-croissant-34901.herokuapp.com/authenticate',
+    url:'https://mydeseos.herokuapp.com/authenticate',
     method:'post',
     success:function(data) {
       if (data.facebookid !== "") {
@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', function(a) {
           });
         })
         chrome.browserAction.onClicked.addListener(function(activeTab) {
-          window.open('https://ronchon-croissant-34901.herokuapp.com/'+mongooseid+'/friendList');
+          window.open('https://mydeseos.herokuapp.com/'+mongooseid+'/friendList');
         })
       } else {
         chrome.browserAction.onClicked.addListener(function(activeTab) {
-          window.open('https://ronchon-croissant-34901.herokuapp.com/');
+          window.open('https://www.google.com');
         })
       }
     }
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
   function onClickHandler(e,tabs) {
     if (e.mediaType === "image") {
       $.ajax({
-        url:"https://ronchon-croissant-34901.herokuapp.com/"+mongooseid+"/addWishList",
+        url:"https://mydeseos.herokuapp.com/"+mongooseid+"/addWishList",
         method:"post",
         data:{
           img:e.srcUrl,
