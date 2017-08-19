@@ -25,7 +25,10 @@ const giftSchema = mongoose.Schema({
     type:mongoose.Schema.ObjectId,
     ref:'User'
   }],
-  private: false
+  right: {
+    type: String,
+    default: "public"
+  }
 })
 
 const User = mongoose.model('User', userSchema);
