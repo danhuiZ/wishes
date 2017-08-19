@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function(a) {
         data:{
           img:e.srcUrl,
           url:e.pageUrl,
-          name:tabs.title
+          name:tabs.title,
+          private: false
         },
         success: function(res) {
           if (res.success) {
@@ -71,6 +72,6 @@ document.addEventListener('DOMContentLoaded', function(a) {
   chrome.runtime.onInstalled.addListener(function() {
     var parent = chrome.contextMenus.create({"title": "Choose your wish list", "contexts": ["image"]});
     chrome.contextMenus.create({"title": "Save to public", "parentId": parent, "contexts": ["image"],"onclick": onClickPublicHandler});
-    chrome.contextMenus.create({"title": "Save to privacy", "parentId": parent, "contexts": ["image"], "onClick": });
+    chrome.contextMenus.create({"title": "Save to privacy", "parentId": parent, "contexts": ["image"], "onclick": onClickPrivateHandler});
   });
 });
