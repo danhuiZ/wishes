@@ -17,7 +17,7 @@ routes.get('/login',(req,res)=> {
 routes.get('/logout',(req,res)=> {
   console.log("before logout");
   console.log(req.cookies.facebookId);
-  res.clearCookie('facebookId',{domain:'.ronchon-croissant-34901.herokuapp.com'});
+  res.clearCookie('facebookId',{domain:'.mydeseos.herokuapp.com'});
   console.log("after");
   res.render('logout');
 });
@@ -133,7 +133,7 @@ routes.post('/authenticate', (req,res)=> {
 
 routes.post('/friendList',(req,res)=> {
   User.findOne({facebookId:req.body.facebookId}).exec((err,found)=> {
-    res.cookie('facebookId',req.body.facebookId,{domain:'.ronchon-croissant-34901.herokuapp.com'});
+    res.cookie('facebookId',req.body.facebookId,{domain:'.mydeseos.herokuapp.com'});
     if (found === null) {
       const newUser = new User({
         username: req.body.username,
