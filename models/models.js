@@ -24,7 +24,8 @@ const giftSchema = mongoose.Schema({
   adoptedUser:[{
     type:mongoose.Schema.ObjectId,
     ref:'User'
-  }]
+  }],
+  private: false
 })
 
 const User = mongoose.model('User', userSchema);

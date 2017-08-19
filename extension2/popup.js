@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
     }
   })
 
-  function onClickHandler(e,tabs) {
+  function onClickPublicHandler(e,tabs) {
     if (e.mediaType === "image") {
       $.ajax({
         url:"https://mydeseos.herokuapp.com/"+mongooseid+"/addWishList",
@@ -41,7 +41,27 @@ document.addEventListener('DOMContentLoaded', function(a) {
         },
         success: function(res) {
           if (res.success) {
-            alert("Your wish has been saved!")
+            alert("Your wish has been saved to public!")
+          }
+        }
+      })
+    }
+  };
+
+  function onClickPrivateHandler(e,tabs) {
+    if (e.mediaType === "image") {
+      $.ajax({
+        url:"https://mydeseos.herokuapp.com/"+mongooseid+"/addWishList",
+        method:"post",
+        data:{
+          img:e.srcUrl,
+          url:e.pageUrl,
+          name:tabs.title,
+          private: true
+        },
+        success: function(res) {
+          if (res.success) {
+            alert("Your wish has been saved to private!")
           }
         }
       })
@@ -50,9 +70,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
 
   chrome.runtime.onInstalled.addListener(function() {
     var parent = chrome.contextMenus.create({"title": "Choose your wish list", "contexts": ["image"]});
-    chrome.contextMenus.create({"title": "Save to public", "parentId": parent, "contexts": ["image"],"onclick": onClickHandler});
-    chrome.contextMenus.create({"title": "Save to privacy", "contexts": ["image"],"parentId": parent});
-    chrome.contextMenus.create({"title": "Save to family", "contexts": ["image"],"parentId": parent});
-    chrome.contextMenus.create({"title": "Save to college friends", "contexts": ["image"],"parentId": parent});
+    chrome.contextMenus.create({"title": "Save to public", "parentId": parent, "contexts": ["image"],"onclick": onClickPublicHandler});
+    chrome.contextMenus.create({"title": "Save to privacy", "parentId": parent, "contexts": ["image"], "onClick": });
   });
 });

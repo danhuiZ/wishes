@@ -92,10 +92,12 @@ routes.get('/:wishid/adopt', (req,res)=> {
 
 routes.post('/:userId/addWishList', (req, res) => {
   const userId = req.params.userId;
+  const private = req.body.private;
   const newGift = new Gift({
     imgUrl: req.body.img,
     purchaseUrl: req.body.url,
-    name: req.body.name
+    name: req.body.name,
+    private: false || private
   })
   newGift.save((err,saved)=>{
     User.findById(userId).exec((err,found)=> {
