@@ -28,6 +28,10 @@ const giftSchema = mongoose.Schema({
   right: {
     type: String,
     default: "public"
+  },
+  private: {
+    type: Boolean,
+    default: false
   }
 })
 

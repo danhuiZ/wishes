@@ -64,7 +64,8 @@
 						{{/each}}
 					{{else}}
 						{{#each wishes}}
-							{{#if right === 'public'}}
+							{{#if private}}
+							{{else}}
 								<div class="item">
 									<div class="animate-box">
 										<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
