@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
     url:'https://mydeseos.herokuapp.com/authenticate',
     method:'post',
     success:function(data) {
+      console.log(data)
       if (data.facebookid !== "") {
         mongooseid = data.facebookid;
         allURL = [...data.urls];
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
         })
       } else {
         chrome.browserAction.onClicked.addListener(function(activeTab) {
-          window.open('https://www.google.com');
+          window.open('https://mydeseos.herokuapp.com/');
         })
       }
     }
