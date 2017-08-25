@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 
 const routes = require('./routes/index');
 
+//changing name checking
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
