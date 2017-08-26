@@ -15,10 +15,7 @@ routes.get('/login',(req,res)=> {
 });
 
 routes.get('/logout',(req,res)=> {
-  console.log("before logout");
-  console.log(req.cookies.facebookId);
   res.clearCookie('facebookId',{domain:'.mydeseos.herokuapp.com'});
-  console.log("after");
   res.render('logout');
 });
 
@@ -61,7 +58,6 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   const selfId = req.params.userId;
   const friendid = req.params.friendId;
   User.findById(selfId).populate('friendsList').exec((err, foundSelf)=> {
-    // console.log("LOGGEDIN USER", foundSelf);
     User.findById(friendid).populate('giftList').exec((err, foundFriend)=> {
       res.render('wishList',{
         wishes: foundFriend.giftList.reverse(),
@@ -92,12 +88,11 @@ routes.get('/:wishid/adopt', (req,res)=> {
 
 routes.post('/:userId/addWishList', (req, res) => {
   const userId = req.params.userId;
-  const private = req.body.private ? "private" : "public";
   const newGift = new Gift({
     imgUrl: req.body.img,
     purchaseUrl: req.body.url,
     name: req.body.name,
-    right: private,
+    right: req.body.private ? "private" : "public",
 		private: req.body.private
   })
   newGift.save((err,saved)=>{
