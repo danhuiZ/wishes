@@ -106,8 +106,8 @@ routes.get('/:wishid/adopt', (req,res)=> {
 routes.post('/:userId/addWishList', (req, res) => {
   const userId = req.params.userId;
 	let right = "public";
-	console.log("type of private boolean???????", typeof req.body.private)
-	if (req.body.private === true) {
+	console.log("type of private boolean???????", typeof req.body.private, req.body.private)
+	if (req.body.private === 'true') {
 		right = "private";
 	}
   const newGift = new Gift({
