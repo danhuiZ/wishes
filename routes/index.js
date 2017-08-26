@@ -88,11 +88,15 @@ routes.get('/:wishid/adopt', (req,res)=> {
 
 routes.post('/:userId/addWishList', (req, res) => {
   const userId = req.params.userId;
+	let right = "public";
+	if (req.body.private) {
+		right+="private";
+	}
   const newGift = new Gift({
     imgUrl: req.body.img,
     purchaseUrl: req.body.url,
     name: req.body.name,
-    right: req.body.private === true ? "private" : "public",
+    right: right,
 		private: req.body.private
   })
   newGift.save((err,saved)=>{
