@@ -74,6 +74,7 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   const friendid = req.params.friendId;
   User.findById(selfId).populate('friendsList').exec((err, foundSelf)=> {
     User.findById(friendid).populate('giftList').exec((err, foundFriend)=> {
+			console.log(req.params.userId);
       res.render('wishList',{
         wishes: foundFriend.giftList.reverse(),
         found: foundSelf,
@@ -81,7 +82,7 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
         friendList: foundSelf.friendsList,
         selfPage: false,
         friendId: friendid,
-				userId: foundSelf._id
+				userId:req.params.userId
       })
     })
   })
