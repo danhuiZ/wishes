@@ -25,6 +25,7 @@ routes.get('/mostpopular',(req,res)=> {
 
 routes.get('/:userId/addToMyWishList/:giftid', (req,res) => {
 	User.findById(req.params.userId).exec((err,foundUser) => {
+		console.log("founduser and inside the correct Route____________________-"+req.params.userId)
 		Gift.findById(req.params.giftid).exec((err, foundGift) => {
 			updateOwnerArr = [...foundGift.giftList];
 			updateOwnerArr.push(foundUser._id);
