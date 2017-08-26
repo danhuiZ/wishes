@@ -97,7 +97,8 @@ routes.post('/:userId/addWishList', (req, res) => {
     imgUrl: req.body.img,
     purchaseUrl: req.body.url,
     name: req.body.name,
-    right: private
+    right: private,
+		private: req.body.private
   })
   newGift.save((err,saved)=>{
     User.findById(userId).exec((err,found)=> {
