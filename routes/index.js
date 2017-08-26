@@ -27,10 +27,11 @@ routes.get('/:userId/addToMyWishList/:giftid', (req,res) => {
 	User.findById(req.params.userId).exec((err,foundUser) => {
 		console.log("founduser and inside the correct Route____________________-"+req.params.userId)
 		Gift.findById(req.params.giftid).exec((err, foundGift) => {
-			updateOwnerArr = [...foundGift.giftList];
-			updateOwnerArr.push(foundUser._id);
-			foundGift.giftList = updateOwnerArr;
-			foundGift.update({giftList:foundUser.giftList}).exec((err,updated) => {
+			updateOwnerArr = [...foundUser.giftList];
+			updateOwnerArr.push(foundGift._id);
+			foundUser.giftList = updateOwnerArr;
+			foundUser.update({giftList:foundUser.giftList}).exec((err,updated) => {
+				console.log("after update+++++++++++++++++++",updated.giftList)
 				res.redirect('/'+foundUser._id + '/wishlists')
 			})
 		});
