@@ -72,6 +72,6 @@ document.addEventListener('DOMContentLoaded', function(a) {
   chrome.runtime.onInstalled.addListener(function() {
     var parent = chrome.contextMenus.create({"title": "Choose your wish list", "contexts": ["image"]});
     chrome.contextMenus.create({"title": "Save to public", "parentId": parent, "contexts": ["image"],"onclick": onClickPublicHandler});
-    chrome.contextMenus.create({"title": "Save to privacy", "parentId": parent, "contexts": ["image"], "onclick": onClickPrivateHandler});
+    chrome.contextMenus.create({"title": "Save to private", "parentId": parent, "contexts": ["image"], "onclick": onClickPrivateHandler});
   });
 });
