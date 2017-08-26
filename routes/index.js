@@ -15,15 +15,27 @@ routes.get('/login',(req,res)=> {
 });
 
 routes.get('/logout',(req,res)=> {
-  console.log("before logout");
-  console.log(req.cookies.facebookId);
   res.clearCookie('facebookId',{domain:'.mydeseos.herokuapp.com'});
-  console.log("after");
   res.render('logout');
 });
 
 routes.get('/mostpopular',(req,res)=> {
   res.render('mostpopular');
+});
+
+routes.get('/:userId/addToMyWishList/:giftid', (req,res) => {
+	User.findById(req.params.userId).exec((err,foundUser) => {
+		console.log("founduser and inside the correct Route____________________-"+req.params.userId)
+		Gift.findById(req.params.giftid).exec((err, foundGift) => {
+			updateOwnerArr = [...foundUser.giftList];
+			updateOwnerArr.push(foundGift._id);
+			foundUser.giftList = updateOwnerArr;
+			foundUser.update({giftList:foundUser.giftList}).exec((err,updated) => {
+				console.log("after update+++++++++++++++++++",updated.giftList)
+				res.redirect('/'+foundUser._id + '/wishlists')
+			})
+		});
+	});
 });
 
 routes.get('/:userId/delete/:giftid',(req,res)=> {
@@ -34,13 +46,13 @@ routes.get('/:userId/delete/:giftid',(req,res)=> {
       });
       foundUser.giftList = giftArr;
       foundUser.update({giftList:foundUser.giftList}).exec((err,updated)=> {
-        res.redirect('/'+req.params.userId+'/friendList');
+        res.redirect('/'+req.params.userId+'/wishlists');
       })
     })
   });
 });
 
-routes.get('/:userId/friendList',(req,res)=> {
+routes.get('/:userId/wishlists',(req,res)=> {
   User.findOne({_id:req.params.userId}).populate('friendsList').populate('giftList').exec((err,found)=> {
     if (found) {
       res.render('wishList',{
@@ -61,7 +73,6 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   const selfId = req.params.userId;
   const friendid = req.params.friendId;
   User.findById(selfId).populate('friendsList').exec((err, foundSelf)=> {
-    // console.log("LOGGEDIN USER", foundSelf);
     User.findById(friendid).populate('giftList').exec((err, foundFriend)=> {
       res.render('wishList',{
         wishes: foundFriend.giftList.reverse(),
@@ -69,7 +80,8 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
         friend: foundFriend,
         friendList: foundSelf.friendsList,
         selfPage: false,
-        friendId: friendid
+        friendId: friendid,
+				userId: foundSelf._id
       })
     })
   })
@@ -83,7 +95,7 @@ routes.get('/:wishid/adopt', (req,res)=> {
     found.update({adopted:found.adopted}).exec((err,updated)=>{
       User.findOne({facebookId:userid}).exec((err,foundUser)=> {
         if (foundUser) {
-          res.redirect('/'+foundUser._id +'/friendList');
+          res.redirect('/'+foundUser._id +'/wishlists');
         }
       })
     })
@@ -92,12 +104,16 @@ routes.get('/:wishid/adopt', (req,res)=> {
 
 routes.post('/:userId/addWishList', (req, res) => {
   const userId = req.params.userId;
-  const private = req.body.private ? "private" : "public";
+	let right = "public";
+	if (req.body.private) {
+		right = "private";
+	}
   const newGift = new Gift({
     imgUrl: req.body.img,
     purchaseUrl: req.body.url,
     name: req.body.name,
-    right: private
+    right: right,
+		private: req.body.private
   })
   newGift.save((err,saved)=>{
     User.findById(userId).exec((err,found)=> {
@@ -143,7 +159,6 @@ routes.post('/friendList',(req,res)=> {
       });
       newUser.save((err, newUser)=> {
         res.json({err: err, found: found, mongooseId: newUser._id});
-        // localStorage.setItem('facebookUser',newUse._id);
         return;
       })
     } else {
@@ -157,7 +172,6 @@ routes.post('/friendList',(req,res)=> {
       .then((data)=> {
         found.friendsList = data.map(friend=>friend._id)
         found.update({friendsList:found.friendsList}).exec((err,saved)=> {
-          // localStorage.setItem('facebookUser',found._id);
           res.json({err:err,mongooseId:found._id});
           return;
         })

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
           });
         })
         chrome.browserAction.onClicked.addListener(function(activeTab) {
-          window.open('https://mydeseos.herokuapp.com/'+mongooseid+'/friendList');
+          window.open('https://mydeseos.herokuapp.com/'+mongooseid+'/wishlists');
         })
       } else {
         chrome.browserAction.onClicked.addListener(function(activeTab) {
