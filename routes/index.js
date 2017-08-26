@@ -78,7 +78,8 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
         friend: foundFriend,
         friendList: foundSelf.friendsList,
         selfPage: false,
-        friendId: friendid
+        friendId: friendid,
+				userId: selfId
       })
     })
   })
