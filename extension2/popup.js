@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(a) {
         })
       } else {
         chrome.browserAction.onClicked.addListener(function(activeTab) {
-          window.open('https://www.google.com');
+          window.open('https://mydeseos.herokuapp.com/');
         })
       }
     }
