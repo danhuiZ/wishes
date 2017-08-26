@@ -90,7 +90,7 @@ routes.post('/:userId/addWishList', (req, res) => {
   const userId = req.params.userId;
 	let right = "public";
 	if (req.body.private) {
-		right+="private";
+		right = "private";
 	}
   const newGift = new Gift({
     imgUrl: req.body.img,
