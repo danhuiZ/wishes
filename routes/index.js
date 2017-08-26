@@ -17,7 +17,7 @@ routes.get('/login',(req,res)=> {
 routes.get('/logout',(req,res)=> {
   console.log("before logout");
   console.log(req.cookies.facebookId);
-  res.clearCookie('facebookId',{domain:'.ronchon-croissant-34901.herokuapp.com'});
+  res.clearCookie('facebookId',{domain:'.mydeseos.herokuapp.com'});
   console.log("after");
   res.render('logout');
 });
@@ -92,10 +92,12 @@ routes.get('/:wishid/adopt', (req,res)=> {
 
 routes.post('/:userId/addWishList', (req, res) => {
   const userId = req.params.userId;
+  const private = req.body.private ? "private" : "public";
   const newGift = new Gift({
     imgUrl: req.body.img,
     purchaseUrl: req.body.url,
-    name: req.body.name
+    name: req.body.name,
+    right: private
   })
   newGift.save((err,saved)=>{
     User.findById(userId).exec((err,found)=> {
@@ -133,7 +135,7 @@ routes.post('/authenticate', (req,res)=> {
 
 routes.post('/friendList',(req,res)=> {
   User.findOne({facebookId:req.body.facebookId}).exec((err,found)=> {
-    res.cookie('facebookId',req.body.facebookId,{domain:'.ronchon-croissant-34901.herokuapp.com'});
+    res.cookie('facebookId',req.body.facebookId,{domain:'.mydeseos.herokuapp.com'});
     if (found === null) {
       const newUser = new User({
         username: req.body.username,
