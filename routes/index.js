@@ -25,13 +25,11 @@ routes.get('/mostpopular',(req,res)=> {
 
 routes.get('/:userId/addToMyWishList/:giftid', (req,res) => {
 	User.findById(req.params.userId).exec((err,foundUser) => {
-		console.log("founduser and inside the correct Route____________________-"+req.params.userId)
 		Gift.findById(req.params.giftid).exec((err, foundGift) => {
 			updateOwnerArr = [...foundUser.giftList];
 			updateOwnerArr.push(foundGift._id);
 			foundUser.giftList = updateOwnerArr;
 			foundUser.update({giftList:foundUser.giftList}).exec((err,updated) => {
-				console.log("after update+++++++++++++++++++",updated.giftList)
 				res.redirect('/'+foundUser._id + '/wishlists')
 			})
 		});
@@ -106,7 +104,6 @@ routes.get('/:wishid/adopt', (req,res)=> {
 routes.post('/:userId/addWishList', (req, res) => {
   const userId = req.params.userId;
 	let right = "public";
-	console.log("type of private boolean???????", typeof req.body.private, req.body.private)
 	if (req.body.private === 'true') {
 		right = "private";
 	}
