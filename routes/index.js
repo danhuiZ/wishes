@@ -69,7 +69,8 @@ routes.get('/:userId/wishlists',(req,res)=> {
 
 routes.get('/:userId/adoptedwishes', (req,res)=> {
 	const selfId = req.params.userId;
-	User.findById(selfId).populate('adoptedGift').exec((err, foundSelf)=> {
+	User.findById(selfId).populate('adoptedGift').populate('friendsList')
+	.exec((err, foundSelf)=> {
 		if (foundSelf) {
 			res.render('wishList', {
 				adoptPage:true,
