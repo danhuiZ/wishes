@@ -86,9 +86,10 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   })
 })
 
-routes.get('/:wishid/adopt', (req,res)=> {
+routes.get('/:wishid/:friendId/adopt', (req,res)=> {
   const userid = req.cookies.facebookId;
   const giftid = req.params.wishid;
+	const friendid = req.params.friendId;
   Gift.findById(giftid).exec((err,found)=> {
 		User.findOne({facebookId:userid}).exec((err,foundUser)=> {
 			if (foundUser) {
@@ -102,7 +103,7 @@ routes.get('/:wishid/adopt', (req,res)=> {
 							if (err) {
 								alert("Sorry, there's something wrong with your current move.\n Please try again later.")
 							} else {
-								res.redirect(req.get('referer'));
+								res.redirect('/'+giftid+'/'+friendid+'/wishlists');
 							}
 						})
 		    })
