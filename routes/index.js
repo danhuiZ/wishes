@@ -67,6 +67,17 @@ routes.get('/:userId/wishlists',(req,res)=> {
   })
 });
 
+routes.get('/:userId/adoptedwishes', (req,res)=> {
+	const selfId = req.params.userId;
+	User.findById(selfId).populate('adoptedGift').exec((err, foundSelf)=> {
+		res.render('wishList', {
+			adoptPage:true,
+			wishes: foundSelf.adoptedGift,
+			selfId: selfId
+		})
+	})
+})
+
 routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   const selfId = req.params.userId;
   const friendid = req.params.friendId;
