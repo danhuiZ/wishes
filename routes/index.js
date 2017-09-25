@@ -99,6 +99,42 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   })
 })
 
+routes.get('/:wishid/:userid/cancel', (req, res)=> {
+	const giftid = req.params.wishid;
+	const selfid = req.params.userid;
+	Gift.findById(giftid).exec( (err, found)=> {
+		if (found) {
+			found.adopted = false;
+			found.adoptedUser = [];
+			found.update({adopted:found.adopted, adoptedUser: found.adoptedUser})
+			.exec( (err, updated)=> {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log("successfully updated");
+					User.findById(selfid).populate(adoptedGift).exec( (err, foundUser)=> {
+						if (foundUser) {
+							var newArr = [];
+							for (var i=0; i < foundUser.adoptedGift.length; i++) {
+								if foundUser.adoptedGift._id !== giftid {
+									newArr.push(foundUser.adoptedGift[i]);
+								}
+							}
+							foundUser.adoptedGift = newArr;
+							foundUser.update({adoptedGift:foundUser.adoptedGift}).exec( (err, updated)=> {
+								if (err) {
+									console.log(err);
+								} else {
+									res.redirect('/'+selfid+'/adoptedwishes');
+								}
+							})
+						}
+					})
+				}
+			})
+		}
+	})
+})
 routes.get('/:wishid/:friendId/adopt', (req,res)=> {
   const userid = req.cookies.facebookId;
   const giftid = req.params.wishid;
