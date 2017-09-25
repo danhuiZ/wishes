@@ -58,7 +58,7 @@ routes.get('/:userId/wishlists',(req,res)=> {
         found: found,
         error: err,
         wishes: found.giftList.reverse(),
-        selfPage:true,
+        selfPage: true,
         userId:req.params.userId
       })
     } else {
