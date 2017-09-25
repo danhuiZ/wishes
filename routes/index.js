@@ -111,16 +111,13 @@ routes.get('/:wishid/:userid/cancel', (req, res)=> {
 				if (err) {
 					console.log(err);
 				} else {
-					console.log("successfully updated");
 					User.findById(selfid).populate('adoptedGift').exec( (err, foundUser)=> {
 						if (foundUser) {
 							var newArr = [];
 							for (var i=0; i < foundUser.adoptedGift.length; i++) {
 								if (foundUser.adoptedGift[i]._id.toString() !== giftid) {
-									console.log(foundUser.adoptedGift[i]._id, giftid);
 									newArr.push(foundUser.adoptedGift[i]);
 								} else {
-									console.log("found the one that's the same", giftid);
 								}
 							}
 							foundUser.adoptedGift = newArr;
