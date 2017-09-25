@@ -90,14 +90,24 @@ routes.get('/:wishid/adopt', (req,res)=> {
   const userid = req.cookies.facebookId;
   const giftid = req.params.wishid;
   Gift.findById(giftid).exec((err,found)=> {
-    found.adopted = true;
-    found.update({adopted:found.adopted}).exec((err,updated)=>{
-      User.findOne({facebookId:userid}).exec((err,foundUser)=> {
-        if (foundUser) {
-          res.redirect('/'+foundUser._id +'/wishlists');
-        }
-      })
-    })
+		User.findOne({facebookId:userid}).exec((err,foundUser)=> {
+			if (foundUser) {
+				found.adopted = true;
+				found.adoptedUser.push(foundUser._id);
+				found.update({adopted:found.adopted, adoptedUser:found.adoptedUser})
+					.exec((err,updated)=>{
+						foundUser.adoptedGift.push(found._id);
+						foundUser.update({adoptedGift:foundUser.adoptedGift})
+						.exec( (err, updatedUser)=> {
+							if (err) {
+								alert("Sorry, there's something wrong with your current move.\n Please try again later.")
+							} else {
+								res.redirect(req.get('referer'));
+							}
+						})
+		    })
+			}
+		})
   })
 })
 
