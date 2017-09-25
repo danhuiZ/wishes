@@ -118,6 +118,8 @@ routes.get('/:wishid/:userid/cancel', (req, res)=> {
 							for (var i=0; i < foundUser.adoptedGift.length; i++) {
 								if (foundUser.adoptedGift[i]._id !== giftid) {
 									newArr.push(foundUser.adoptedGift[i]);
+								} else {
+									console.log("found the one that's the same", giftid);
 								}
 							}
 							foundUser.adoptedGift = newArr;
