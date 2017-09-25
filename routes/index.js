@@ -73,7 +73,8 @@ routes.get('/:userId/adoptedwishes', (req,res)=> {
 		res.render('wishList', {
 			adoptPage:true,
 			wishes: foundSelf.adoptedGift,
-			selfId: selfId
+			selfId: selfId,
+			friendList: foundSelf.friendList
 		})
 	})
 })
