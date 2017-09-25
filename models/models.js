@@ -10,7 +10,12 @@ const userSchema = mongoose.Schema({
   }],
   friendsList: [{
     type: mongoose.Schema.ObjectId,
-    ref: 'User' }]
+    ref: 'User'
+	}],
+	adoptedGift: [{
+		type: mongoose.Schema.ObjectId,
+		ref: 'Gift'
+	}]
 });
 
 const giftSchema = mongoose.Schema({
