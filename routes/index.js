@@ -71,18 +71,20 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   const selfId = req.params.userId;
   const friendid = req.params.friendId;
   User.findById(selfId).populate('friendsList').exec((err, foundSelf)=> {
-    User.findById(friendid).populate('giftList').exec((err, foundFriend)=> {
-			console.log(req.params.userId);
-      res.render('wishList',{
-        wishes: foundFriend.giftList.reverse(),
-        found: foundSelf,
-        friend: foundFriend,
-        friendList: foundSelf.friendsList,
-        selfPage: false,
-        friendId: friendid,
-				userId:req.params.userId
-      })
-    })
+		if (foundSelf) {
+			User.findById(friendid).populate('giftList').exec((err, foundFriend)=> {
+				console.log(req.params.userId);
+	      res.render('wishList',{
+	        wishes: foundFriend.giftList.reverse(),
+	        found: foundSelf,
+	        friend: foundFriend,
+	        friendList: foundSelf.friendsList,
+	        selfPage: false,
+	        friendId: friendid,
+					userId:req.params.userId
+	      })
+	    })
+		}
   })
 })
 
@@ -103,7 +105,7 @@ routes.get('/:wishid/:friendId/adopt', (req,res)=> {
 							if (err) {
 								alert("Sorry, there's something wrong with your current move.\n Please try again later.")
 							} else {
-								res.redirect('/'+giftid+'/'+friendid+'/wishlists');
+								res.redirect('/'+foundUser._id+'/'+friendid+'/wishlists');
 							}
 						})
 		    })
