@@ -116,7 +116,7 @@ routes.get('/:wishid/:userid/cancel', (req, res)=> {
 						if (foundUser) {
 							var newArr = [];
 							for (var i=0; i < foundUser.adoptedGift.length; i++) {
-								if (foundUser.adoptedGift[i]._id !== giftid) {
+								if (foundUser.adoptedGift[i]._id.toString() !== giftid) {
 									console.log(foundUser.adoptedGift[i]._id, giftid);
 									newArr.push(foundUser.adoptedGift[i]);
 								} else {
