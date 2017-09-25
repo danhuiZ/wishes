@@ -70,12 +70,15 @@ routes.get('/:userId/wishlists',(req,res)=> {
 routes.get('/:userId/adoptedwishes', (req,res)=> {
 	const selfId = req.params.userId;
 	User.findById(selfId).populate('adoptedGift').exec((err, foundSelf)=> {
-		res.render('wishList', {
-			adoptPage:true,
-			wishes: foundSelf.adoptedGift,
-			selfId: selfId,
-			friendList: foundSelf.friendList
-		})
+		if (foundSelf) {
+			res.render('wishList', {
+				adoptPage:true,
+				wishes: foundSelf.adoptedGift,
+				selfId: selfId,
+				friendList: foundSelf.friendsList,
+				found:foundSelf
+			})
+		}
 	})
 })
 
@@ -85,7 +88,6 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   User.findById(selfId).populate('friendsList').exec((err, foundSelf)=> {
 		if (foundSelf) {
 			User.findById(friendid).populate('giftList').exec((err, foundFriend)=> {
-				console.log(req.params.userId);
 	      res.render('wishList',{
 	        wishes: foundFriend.giftList.reverse(),
 	        found: foundSelf,
