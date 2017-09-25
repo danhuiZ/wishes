@@ -112,7 +112,7 @@ routes.get('/:wishid/:userid/cancel', (req, res)=> {
 					console.log(err);
 				} else {
 					console.log("successfully updated");
-					User.findById(selfid).populate(adoptedGift).exec( (err, foundUser)=> {
+					User.findById(selfid).populate('adoptedGift').exec( (err, foundUser)=> {
 						if (foundUser) {
 							var newArr = [];
 							for (var i=0; i < foundUser.adoptedGift.length; i++) {
