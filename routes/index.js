@@ -83,6 +83,44 @@ routes.get('/:userId/adoptedwishes', (req,res)=> {
 	})
 })
 
+routes.get('/:userId/received/:giftId', (req, res)=> {
+	const selfId = req.params.userId;
+	const giftId = req.params.giftId;
+	Gift.findbyId(giftId).populate('adoptedUser').exec((err, foundGift)=> {
+		if (foundGift) {
+			foundGift.received = true;
+			foundGift.update({received:foundGift.received}).exec( (err, updatedGift)=> {
+				if (err) {
+					console.log(err);
+				} else {
+					User.findById(selfId).exec( (err, foundSelf)=> {
+						foundSelf.receivedGift.push(foundGift._id);
+						foundSelf.receivedCount++;
+						foundSelf.update({receivedGift:foundSelf.receivedGift,receivedCount:foundSelf.receivedCount})
+						.exec( (err, updatedSelf)=> {
+							if (err) {
+								console.log(err);
+							} else {
+								User.findById(foundGift.adoptedUser._id).exec( (err, foundAdoptUser)=> {
+									foundAdoptUser.sentCount++;
+									foundAdoptUser.update({sentCount:foundAdoptUser.sentCount})
+									.exec( (err, updatedAdoptUser)=> {
+										if (err) {
+											console.log(err);
+										} else {
+											res.redirect('/'+selfId+'/wishlists');
+										}
+									})
+								})
+							}
+						})
+					})
+				}
+			})
+		}
+	})
+});
+
 routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   const selfId = req.params.userId;
   const friendid = req.params.friendId;

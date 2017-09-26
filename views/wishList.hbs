@@ -69,19 +69,23 @@
 					{{else}}
 					{{#if selfPage}}
 						{{#each wishes}}
+							{{#if received}}
+							{{else}}
 							<div class="item">
 								<div class="animate-box">
-									<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
+									<a href={{../imgUrl}} class="image-popup fh5co-board-img"><img src={{../imgUrl}} alt="Deseo pic"></a>
 								</div>
 								<div class="container-flex">
-									<div class="text-center text-topmargin text-green">{{right}}</div>
-									<div class="fh5co-desc">{{name}}</div>
+									<div class="text-center text-topmargin text-green">{{../right}}</div>
+									<div class="fh5co-desc">{{../name}}</div>
 									<div class="container-flex">
-										<a class="text-left text-leftpadding text-bottompadding" href={{purchaseUrl}} target="_blank">Purchase Link</a>
-										<a class="text-right text-rightpadding text-bottompadding" href="/{{../userId}}/delete/{{_id}}">Delete item</a>
+										<a class="text-left text-leftpadding text-bottompadding" href={{../purchaseUrl}} target="_blank">Purchase Link</a>
+										<a class="text-right text-rightpadding text-bottompadding" href="/{{../../userId}}/delete/{{../_id}}">Delete item</a>
+										<a class="text-right text-rightpadding text-bottompadding" href="/{{../../userId}}/received/{{../_id}}">Received!</a>
 									</div>
 								</div>
 							</div>
+							{{/if}}
 						{{/each}}
 					{{else}}
 						{{#each wishes}}
