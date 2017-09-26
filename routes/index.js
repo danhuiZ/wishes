@@ -185,7 +185,7 @@ routes.get('/:wishid/:friendId/adopt', (req,res)=> {
 		User.findOne({facebookId:userid}).exec((err,foundUser)=> {
 			if (foundUser) {
 				found.adopted = true;
-				found.adoptedUser.push(foundUser._id);
+				found.adoptedUser = foundUser._id;
 				found.update({adopted:found.adopted, adoptedUser:found.adoptedUser})
 					.exec((err,updated)=>{
 						foundUser.adoptedGift.push(found._id);
