@@ -7398,6 +7398,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #fh5co-offcanvass, #fh5co-offcanvass2 {
   position: fixed;
+  overflow: auto;
   z-index: 88;
   top: 0;
   right: 0;
@@ -7412,7 +7413,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0;
   width: 300px;
   padding: 40px 30px;
-  background: #fff;
+  background: rgb(255, 251, 248);
   -webkit-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
   -ms-box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
@@ -7708,6 +7709,16 @@ h1, h2, h3, h4, h5, h6 {
 
 #fh5co-main {
   padding-top: 5em;
+}
+
+#fh5co-main div, #fh5co-main img, #fh5co-main a {
+  background: #fffbf8;
+};
+
+#adoptedwishes {
+  font-size: 20px;
+  color: green;
+  margin-bottom: 10em;
 }
 
 #fh5co-board .item {
