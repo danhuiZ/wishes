@@ -91,23 +91,26 @@
 						{{#each wishes}}
 							{{#if private}}
 							{{else}}
-								<div class="item">
-									<div class="animate-box">
-										<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
-									</div>
-									<a class="text-center text-topmargin" href={{purchaseUrl}}>Purchase Link</a>
-									<div class="container-flex">
-										<div class="fh5co-desc">{{name}}</div>
+								{{#if received}}
+								{{else}}
+									<div class="item">
+										<div class="animate-box">
+											<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
+										</div>
+										<a class="text-center text-topmargin" href={{purchaseUrl}}>Purchase Link</a>
 										<div class="container-flex">
-											{{#if adopted}}
-												<div class="text-left text-leftpadding text-bottompadding text-green">Adopted</div>
-											{{else}}
-												<a class="text-left text-leftpadding text-bottompadding text-green" href="/{{_id}}/{{../../../friendId}}/adopt">Adopt this gift</a>
-											{{/if}}
-										<a class="text-right text-rightpadding text-bottompadding" href="/{{../../userId}}/addToMyWishList/{{_id}}">Add to my wishlist</a>
+											<div class="fh5co-desc">{{name}}</div>
+											<div class="container-flex">
+												{{#if adopted}}
+													<div class="text-left text-leftpadding text-bottompadding text-green">Adopted</div>
+												{{else}}
+													<a class="text-left text-leftpadding text-bottompadding text-green" href="/{{_id}}/{{../../../friendId}}/adopt">Adopt this gift</a>
+												{{/if}}
+											<a class="text-right text-rightpadding text-bottompadding" href="/{{../../userId}}/addToMyWishList/{{_id}}">Add to my wishlist</a>
+										</div>
+										</div>
 									</div>
-									</div>
-								</div>
+								{{/if}}
 							{{/if}}
 						{{/each}}
 					{{/if}}
