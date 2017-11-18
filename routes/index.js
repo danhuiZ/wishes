@@ -95,7 +95,7 @@ routes.get('/:userId/received/:giftId', (req, res)=> {
 				} else {
 					User.findById(selfId).exec( (err, foundSelf)=> {
 						foundSelf.receivedGift.push(foundGift._id);
-						foundSelf.receivedCount++;
+						foundSelf.receivedCount+=1;
 						foundSelf.update({receivedGift:foundSelf.receivedGift,receivedCount:foundSelf.receivedCount})
 						.exec( (err, updatedSelf)=> {
 							if (err) {

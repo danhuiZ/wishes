@@ -20,8 +20,13 @@ const userSchema = mongoose.Schema({
 		type: mongoose.Schema.ObjectId,
 		ref: 'Gift'
 	}],
-	receivedCount: Number,
-	sentCount: Number
+	receivedCount: {
+		type: Number,
+		default: 0
+	},
+	sentCount: {
+		type: Number,
+		default: 0
 });
 
 const giftSchema = mongoose.Schema({
