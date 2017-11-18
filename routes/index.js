@@ -155,7 +155,7 @@ routes.get('/:wishid/:userid/cancel', (req, res)=> {
 	Gift.findById(giftid).exec( (err, found)=> {
 		if (found) {
 			found.adopted = false;
-			found.adoptedUser = [];
+			found.adoptedUser = null;
 			found.update({adopted:found.adopted, adoptedUser: found.adoptedUser})
 			.exec( (err, updated)=> {
 				if (err) {
