@@ -104,7 +104,7 @@ routes.get('/:userId/received/:giftId', (req, res)=> {
 								console.log(err);
 							} else {
 								if (foundGift.adoptedUser) {
-									User.findById(foundGift.adoptedUser._id).exec( (err, foundAdoptUser)=> {
+									User.findById(foundGift.adoptedUser).exec( (err, foundAdoptUser)=> {
 										if (!foundAdoptUser) {
 											console.log("Didn't find adopted user");
 										} else {
