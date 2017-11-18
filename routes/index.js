@@ -103,17 +103,23 @@ routes.get('/:userId/received/:giftId', (req, res)=> {
 							if (err) {
 								console.log(err);
 							} else {
-								User.findById(foundGift.adoptedUser._id).exec( (err, foundAdoptUser)=> {
-									foundAdoptUser.sentCount++;
-									foundAdoptUser.update({sentCount:foundAdoptUser.sentCount})
-									.exec( (err, updatedAdoptUser)=> {
-										if (err) {
-											console.log(err);
+								if (foundGift.adoptedUser) {
+									User.findById(foundGift.adoptedUser._id).exec( (err, foundAdoptUser)=> {
+										if (!foundAdoptUser) {
+											console.log("Didn't find adopted user");
 										} else {
-											res.redirect('/'+selfId+'/wishlists');
+											foundAdoptUser.sentCount += 1;
+											foundAdoptUser.update({sentCount:foundAdoptUser.sentCount})
+											.exec( (err, updatedAdoptUser)=> {
+												if (err) {
+													console.log(err);
+												} else {
+													res.redirect('/'+selfId+'/wishlists');
+												}
+											})
 										}
 									})
-								})
+								}
 							}
 						})
 					})
