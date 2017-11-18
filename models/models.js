@@ -27,6 +27,7 @@ const userSchema = mongoose.Schema({
 	sentCount: {
 		type: Number,
 		default: 0
+	}
 });
 
 const giftSchema = mongoose.Schema({
