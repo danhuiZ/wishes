@@ -89,13 +89,15 @@ routes.get('/:userId/received/:giftId', (req, res)=> {
 	Gift.findById(giftId).populate('adoptedUser').exec((err, foundGift)=> {
 		if (foundGift) {
 			foundGift.received = true;
-			foundGift.update({received:foundGift.received}).exec( (err, updatedGift)=> {
+			foundGift.adoptedUser = selfId;
+			foundGift.update({received:foundGift.received, adoptedUser:foundGift.adoptedUser}).
+				exec( (err, updatedGift)=> {
 				if (err) {
 					console.log(err);
 				} else {
 					User.findById(selfId).exec( (err, foundSelf)=> {
 						foundSelf.receivedGift.push(foundGift._id);
-						foundSelf.receivedCount+=1;
+						foundSelf.receivedCount += 1;
 						foundSelf.update({receivedGift:foundSelf.receivedGift,receivedCount:foundSelf.receivedCount})
 						.exec( (err, updatedSelf)=> {
 							if (err) {
