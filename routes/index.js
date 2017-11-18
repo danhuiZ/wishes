@@ -108,7 +108,11 @@ routes.get('/:userId/received/:giftId', (req, res)=> {
 										if (!foundAdoptUser) {
 											console.log("Didn't find adopted user");
 										} else {
-											foundAdoptUser.sentCount += 1;
+											if (foundAdoptUser.sentCount) {
+												foundAdoptUser.sentCount += 1;
+											} else {
+												foundAdoptUser.sentCount = 1;
+											}
 											foundAdoptUser.update({sentCount:foundAdoptUser.sentCount})
 											.exec( (err, updatedAdoptUser)=> {
 												if (err) {
