@@ -90,20 +90,22 @@
 						{{/each}}
 					{{else}}
 						{{#if receivePage}}
-						{{#each wishes}}
-							<div class="item">
-								<div class="animate-box">
-									<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
-								</div>
-								<div class="container-flex">
-									<div class="fh5co-desc">{{name}}</div>
+							{{#each wishes}}
+								<div class="item">
+									<div class="animate-box">
+										<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
+									</div>
 									<div class="container-flex">
-										<a class="text-left text-leftpadding text-bottompadding" href={{purchaseUrl}} target="_blank">Purchase Link</a>
-										<a class="text-right text-rightpadding text-bottompadding" href="/{{_id}}/{{../selfId}}/cancelReceive">Didn't receive</a>
+										<div class="fh5co-desc">{{name}}</div>
+										<div class="container-flex">
+											<a class="text-left text-leftpadding text-bottompadding" href={{purchaseUrl}} target="_blank">Purchase Link</a>
+											<a class="text-right text-rightpadding text-bottompadding" href="/{{_id}}/{{../selfId}}/cancelReceive">Didn't receive</a>
+										</div>
 									</div>
 								</div>
-							</div>
-						{{/each}}
+							{{/each}}
+							{{else}}
+							{{/if}}
 						{{else}}
 							{{#each wishes}}
 								{{#if private}}
