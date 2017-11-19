@@ -103,7 +103,7 @@ routes.get('/:userId/receivedwishes', (req,res)=> {
 routes.get('/:userId/received/:giftId', (req, res)=> {
 	const selfId = req.params.userId;
 	const giftId = req.params.giftId;
-	Gift.findById(giftId).populate('adoptedUser').exec((err, foundGift)=> {
+	Gift.findById(giftId).exec((err, foundGift)=> {
 		if (foundGift) {
 			foundGift.received = true;
 			foundGift.adoptedUser = selfId;
