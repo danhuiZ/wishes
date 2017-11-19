@@ -42,10 +42,14 @@ const giftSchema = mongoose.Schema({
 		type: Boolean,
 		default: false
 	},
-  adoptedUser:{
-    type:mongoose.Schema.ObjectId,
+  adoptedUser: {
+		type:mongoose.Schema.ObjectId,
     ref:'User'
   },
+	sentUser: {
+		type:mongoose.Schema.ObjectId,
+		ref:'User'
+	},
   right: {
     type: String,
     default: "public"

@@ -4,6 +4,7 @@
 		<h1 class="fh5co-logo"><a class="navbar-brand" href="/{{found._id}}/wishlists">{{found.username}}'s friends' wishlists</a></h1>
 		<ul>
 			<a id="adoptedwishes" href="/{{found._id}}/adoptedwishes">~My Adopted Wishes~</a>
+			<a id="receivedwishes" href="/{{found._id}}/receivedwishes">~My Received Wishes~</a>
 			{{#each friendList}}
 				<li><a href="/{{../found._id}}/{{_id}}/wishlists">{{username}}</a></li>
 			{{/each}}
@@ -61,7 +62,7 @@
 									<div class="fh5co-desc">{{name}}</div>
 									<div class="container-flex">
 										<a class="text-left text-leftpadding text-bottompadding" href={{purchaseUrl}} target="_blank">Purchase Link</a>
-										<a class="text-right text-rightpadding text-bottompadding" href="/{{_id}}/{{../selfId}}/cancel">Cancel adoption</a>
+										<a class="text-right text-rightpadding text-bottompadding" href="/{{_id}}/{{../selfId}}/cancelAdopt">Cancel adoption</a>
 									</div>
 								</div>
 							</div>
@@ -88,31 +89,47 @@
 							{{/if}}
 						{{/each}}
 					{{else}}
+						{{#if receivePage}}
 						{{#each wishes}}
-							{{#if private}}
-							{{else}}
-								{{#if received}}
-								{{else}}
-									<div class="item">
-										<div class="animate-box">
-											<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
-										</div>
-										<a class="text-center text-topmargin" href={{purchaseUrl}}>Purchase Link</a>
-										<div class="container-flex">
-											<div class="fh5co-desc">{{name}}</div>
-											<div class="container-flex">
-												{{#if adopted}}
-													<div class="text-left text-leftpadding text-bottompadding text-green">Adopted</div>
-												{{else}}
-													<a class="text-left text-leftpadding text-bottompadding text-green" href="/{{_id}}/{{../../../../friendId}}/adopt">Adopt this gift</a>
-												{{/if}}
-											<a class="text-right text-rightpadding text-bottompadding" href="/{{../../../userId}}/addToMyWishList/{{_id}}">Add to my wishlist</a>
-										</div>
-										</div>
+							<div class="item">
+								<div class="animate-box">
+									<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
+								</div>
+								<div class="container-flex">
+									<div class="fh5co-desc">{{name}}</div>
+									<div class="container-flex">
+										<a class="text-left text-leftpadding text-bottompadding" href={{purchaseUrl}} target="_blank">Purchase Link</a>
+										<a class="text-right text-rightpadding text-bottompadding" href="/{{_id}}/{{../selfId}}/cancelReceive">Didn't receive</a>
 									</div>
-								{{/if}}
-							{{/if}}
+								</div>
+							</div>
 						{{/each}}
+						{{else}}
+							{{#each wishes}}
+								{{#if private}}
+								{{else}}
+									{{#if received}}
+									{{else}}
+										<div class="item">
+											<div class="animate-box">
+												<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
+											</div>
+											<a class="text-center text-topmargin" href={{purchaseUrl}}>Purchase Link</a>
+											<div class="container-flex">
+												<div class="fh5co-desc">{{name}}</div>
+												<div class="container-flex">
+													{{#if adopted}}
+														<div class="text-left text-leftpadding text-bottompadding text-green">Adopted</div>
+													{{else}}
+														<a class="text-left text-leftpadding text-bottompadding text-green" href="/{{_id}}/{{../../../../friendId}}/adopt">Adopt this gift</a>
+													{{/if}}
+												<a class="text-right text-rightpadding text-bottompadding" href="/{{../../../userId}}/addToMyWishList/{{_id}}">Add to my wishlist</a>
+											</div>
+											</div>
+										</div>
+									{{/if}}
+								{{/if}}
+							{{/each}}
 					{{/if}}
 					{{/if}}
         </div>
