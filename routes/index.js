@@ -121,11 +121,7 @@ routes.get('/:userId/received/:giftId', (req, res)=> {
 									console.log("Didn't find adopted user");
 								} else {
 									foundGift.sentUser = foundAdoptUser;
-									if (foundAdoptUser.sentCount) {
-										foundAdoptUser.sentCount += 1;
-									} else {
-										foundAdoptUser.sentCount = 1;
-									}
+									foundAdoptUser.sentCount += 1;
 									foundAdoptUser.update({sentCount:foundAdoptUser.sentCount})
 									.exec( (err, updatedAdoptUser)=> {
 										if (err) {
@@ -223,8 +219,8 @@ routes.get('/:wishid/:userid/cancelReceive', (req, res)=> {
 	Gift.findById(giftid).exec( (err, found)=> {
 		if (found) {
 			found.received = false;
-			found.receivedCount--;
-			found.update({received:found.received, receivedCount: found.receivedCount})
+			found.sentUser = null;
+			found.update({received:found.received, sentUser:found.sentUser})
 			.exec( (err, updated)=> {
 				if (err) {
 					console.log(err);
@@ -238,7 +234,9 @@ routes.get('/:wishid/:userid/cancelReceive', (req, res)=> {
 								}
 							}
 							foundUser.receivedGift = newArr;
-							foundUser.update({receivedGift:foundUser.receivedGift}).exec( (err, updated)=> {
+						  foundUser.receivedCount--;
+							foundUser.update({receivedGift:foundUser.receivedGift,receivedCount: foundUser.receivedCount})
+							.exec( (err, updated)=> {
 								if (err) {
 									console.log(err);
 								} else {
