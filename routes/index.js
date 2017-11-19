@@ -233,7 +233,7 @@ routes.get('/:wishid/:userid/cancelReceive', (req, res)=> {
 						if (foundUser) {
 							var newArr = [];
 							for (var i=0; i < foundUser.receivedGift.length; i++) {
-								if (foundUser.receivedGift[i]._id.toString() !== giftid) {
+								if (foundUser.receivedGift[i].toString() !== giftid) {
 									newArr.push(foundUser.receivedGift[i]);
 								}
 							}
