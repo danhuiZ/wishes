@@ -81,44 +81,79 @@ routes.get('/:userId/adoptedwishes', (req,res)=> {
 			})
 		}
 	})
-})
+});
+
+routes.get('/:userId/receivedwishes', (req,res)=> {
+	const selfId = req.params.userId;
+	User.findById(selfId).populate('receivedGift')
+											 .populate('friendsList')
+	.exec((err, foundSelf)=> {
+		if (foundSelf) {
+			res.render('wishList', {
+				receivePage:true,
+				wishes: foundSelf.receivedGift,
+				selfId: selfId,
+				friendList: foundSelf.friendsList,
+				found:foundSelf
+			})
+		}
+	})
+});
 
 routes.get('/:userId/received/:giftId', (req, res)=> {
 	const selfId = req.params.userId;
 	const giftId = req.params.giftId;
-	Gift.findById(giftId).populate('adoptedUser').exec((err, foundGift)=> {
+	Gift.findById(giftId).exec((err, foundGift)=> {
 		if (foundGift) {
 			foundGift.received = true;
-			foundGift.update({received:foundGift.received}).exec( (err, updatedGift)=> {
-				if (err) {
-					console.log(err);
-				} else {
-					User.findById(selfId).exec( (err, foundSelf)=> {
-						foundSelf.receivedGift.push(foundGift._id);
-						foundSelf.receivedCount++;
-						foundSelf.update({receivedGift:foundSelf.receivedGift,receivedCount:foundSelf.receivedCount})
-						.exec( (err, updatedSelf)=> {
-							if (err) {
-								console.log(err);
-							} else {
-								User.findById(foundGift.adoptedUser._id).exec( (err, foundAdoptUser)=> {
-									foundAdoptUser.sentCount++;
+			foundGift.adoptedUser = selfId;
+			User.findById(selfId).exec( (err, foundSelf)=> {
+				foundSelf.receivedGift.push(foundGift._id);
+				foundSelf.receivedCount += 1;
+				foundSelf.update({receivedGift:foundSelf.receivedGift,receivedCount:foundSelf.receivedCount})
+				.exec( (err, updatedSelf)=> {
+					if (err) {
+						console.log(err);
+					} else {
+						if (foundGift.adoptedUser) {
+							User.findById(foundGift.adoptedUser).exec( (err, foundAdoptUser)=> {
+								if (!foundAdoptUser) {
+									console.log("Didn't find adopted user");
+								} else {
+									foundGift.sentUser = foundAdoptUser;
+									foundAdoptUser.sentCount += 1;
 									foundAdoptUser.update({sentCount:foundAdoptUser.sentCount})
 									.exec( (err, updatedAdoptUser)=> {
 										if (err) {
 											console.log(err);
+											foundGift.update({received:foundGift.received, adoptedUser:foundGift.adoptedUser})
+												.exec( (err, updatedGift)=> {
+													if (err) {
+														console.log(err);
+													} else {
+														res.redirect('/'+selfId+'/wishlists');
+													}
+												})
 										} else {
-											res.redirect('/'+selfId+'/wishlists');
+											foundGift.update({received:foundGift.received, adoptedUser:foundGift.adoptedUser,
+																				sentUser:foundGift.sentUser})
+												.exec( (err, updatedGift)=> {
+												if (err) {
+													console.log(err);
+												} else {
+													res.redirect('/'+selfId+'/wishlists');
+												}
+											});
 										}
-									})
-								})
-							}
-						})
-					})
-				}
-			})
+									});
+								}
+							});
+						}
+					}
+				});
+			});
 		}
-	})
+	});
 });
 
 routes.get('/:userId/:friendId/wishlists', (req,res)=> {
@@ -141,13 +176,13 @@ routes.get('/:userId/:friendId/wishlists', (req,res)=> {
   })
 })
 
-routes.get('/:wishid/:userid/cancel', (req, res)=> {
+routes.get('/:wishid/:userid/cancelAdopt', (req, res)=> {
 	const giftid = req.params.wishid;
 	const selfid = req.params.userid;
 	Gift.findById(giftid).exec( (err, found)=> {
 		if (found) {
 			found.adopted = false;
-			found.adoptedUser = [];
+			found.adoptedUser = null;
 			found.update({adopted:found.adopted, adoptedUser: found.adoptedUser})
 			.exec( (err, updated)=> {
 				if (err) {
@@ -176,7 +211,46 @@ routes.get('/:wishid/:userid/cancel', (req, res)=> {
 			})
 		}
 	})
-})
+});
+
+routes.get('/:wishid/:userid/cancelReceive', (req, res)=> {
+	const giftid = req.params.wishid;
+	const selfid = req.params.userid;
+	Gift.findById(giftid).exec( (err, found)=> {
+		if (found) {
+			found.received = false;
+			found.sentUser = null;
+			found.update({received:found.received, sentUser:found.sentUser})
+			.exec( (err, updated)=> {
+				if (err) {
+					console.log(err);
+				} else {
+					User.findById(selfid).populate('adoptedGift').exec( (err, foundUser)=> {
+						if (foundUser) {
+							var newArr = [];
+							for (var i=0; i < foundUser.receivedGift.length; i++) {
+								if (foundUser.receivedGift[i].toString() !== giftid) {
+									newArr.push(foundUser.receivedGift[i]);
+								}
+							}
+							foundUser.receivedGift = newArr;
+						  foundUser.receivedCount--;
+							foundUser.update({receivedGift:foundUser.receivedGift,receivedCount: foundUser.receivedCount})
+							.exec( (err, updated)=> {
+								if (err) {
+									console.log(err);
+								} else {
+									res.redirect('/'+selfid+'/receivedwishes');
+								}
+							})
+						}
+					})
+				}
+			})
+		}
+	})
+});
+
 routes.get('/:wishid/:friendId/adopt', (req,res)=> {
   const userid = req.cookies.facebookId;
   const giftid = req.params.wishid;

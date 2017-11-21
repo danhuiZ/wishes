@@ -20,8 +20,14 @@ const userSchema = mongoose.Schema({
 		type: mongoose.Schema.ObjectId,
 		ref: 'Gift'
 	}],
-	receivedCount: Number,
-	sentCount: Number
+	receivedCount: {
+		type: Number,
+		default: 0
+	},
+	sentCount: {
+		type: Number,
+		default: 0
+	}
 });
 
 const giftSchema = mongoose.Schema({
@@ -36,10 +42,14 @@ const giftSchema = mongoose.Schema({
 		type: Boolean,
 		default: false
 	},
-  adoptedUser:{
-    type:mongoose.Schema.ObjectId,
+  adoptedUser: {
+		type:mongoose.Schema.ObjectId,
     ref:'User'
   },
+	sentUser: {
+		type:mongoose.Schema.ObjectId,
+		ref:'User'
+	},
   right: {
     type: String,
     default: "public"
