@@ -29,7 +29,7 @@
     "express-validator": "^3.2.0",
     "hbs": "^3.1.1",
     "localStorage": "^1.0.3",
-    "mongoose": "^4.10.8",
+    "mongoose": "^4.13.4",
     "morgan": "^1.6.1",
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
