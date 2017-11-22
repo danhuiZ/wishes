@@ -60,6 +60,10 @@ a {
   background-color: transparent;
 }
 
+a.fh5co-desc {
+  color: blue;
+}
+
 a:active,
 a:hover {
   outline: 0;
@@ -1644,6 +1648,14 @@ mark,
   padding-left: 10px;
 }
 
+.text-leftmargin {
+  margin-left: 10px;
+}
+
+.text-rightmargin {
+  margin-right: 10px;
+}
+
 .text-bottompadding {
   padding-bottom: 10px;
 }
@@ -1962,6 +1974,12 @@ pre code {
 .container-flex {
   display: flex;
   flex-direction: column;
+}
+
+.container-flex-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .container {
@@ -7711,9 +7729,11 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 5em;
 }
 
-#fh5co-main div, #fh5co-main img, #fh5co-main a {
+div.img-infoBox {
   background: #fffbf8;
 };
+
+
 
 #adoptedwishes {
   font-size: 20px;

@@ -47,6 +47,8 @@
 
 
 	<div id="fh5co-main">
+		{{#unless wishes.length}}
+		<!-- {{else}} -->
 		<div class="container">
 
 			<div class="row">
@@ -58,11 +60,11 @@
 								<div class="animate-box">
 									<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
 								</div>
-								<div class="container-flex">
-									<div class="fh5co-desc">{{name}}</div>
-									<div class="container-flex">
-										<a class="text-left text-leftpadding text-bottompadding" href={{purchaseUrl}} target="_blank">Purchase Link</a>
-										<a class="text-right text-rightpadding text-bottompadding" href="/{{_id}}/{{../selfId}}/cancelAdopt">Cancel adoption</a>
+								<div class="container-flex img-infoBox">
+									<a class="fh5co-desc" href={{purchaseUrl}} target="_blank">{{name}}</a>
+									<div class="container-flex-horizontal">
+										<a class="text-left text-leftpadding text-leftmargin text-bottompadding" href="/{{_id}}/{{../selfId}}/cancel">Cancel adoption</a>
+										<a class="text-right text-rightpadding text-rightmargin text-bottompadding text-green" href={{purchaseUrl}} target="_blank">Buy it now!</a>
 									</div>
 								</div>
 							</div>
@@ -76,13 +78,13 @@
 								<div class="animate-box">
 									<a href={{../imgUrl}} class="image-popup fh5co-board-img"><img src={{../imgUrl}} alt="Deseo pic"></a>
 								</div>
-								<div class="container-flex">
+								<div class="container-flex img-infoBox">
 									<div class="text-center text-topmargin text-green">{{../right}}</div>
-									<div class="fh5co-desc">{{../name}}</div>
-									<div class="container-flex">
-										<a class="text-left text-leftpadding text-bottompadding" href={{../purchaseUrl}} target="_blank">Purchase Link</a>
-										<a class="text-right text-rightpadding text-bottompadding" href="/{{../../userId}}/delete/{{../_id}}">Delete item</a>
-										<a class="text-right text-rightpadding text-bottompadding" href="/{{../../userId}}/received/{{../_id}}">Received!</a>
+									<a class="fh5co-desc" href={{purchaseUrl}} target="_blank">{{../name}}</a>
+									<div class="container-flex-horizontal">
+										<!-- <a class="text-left text-leftpadding text-bottompadding" href={{../purchaseUrl}} target="_blank">Purchase Link</a> -->
+										<a class="text-left text-leftpadding text-leftmargin text-bottompadding" href="/{{../../userId}}/delete/{{../_id}}">Delete item</a>
+										<a class="text-right text-rightpadding text-rightmargin text-bottompadding" href="/{{../../userId}}/received/{{../_id}}">Received!</a>
 									</div>
 								</div>
 							</div>
@@ -95,11 +97,11 @@
 									<div class="animate-box">
 										<a href={{imgUrl}} class="image-popup fh5co-board-img"><img src={{imgUrl}} alt="Deseo pic"></a>
 									</div>
-									<div class="container-flex">
-										<div class="fh5co-desc">{{name}}</div>
-										<div class="container-flex">
-											<a class="text-left text-leftpadding text-bottompadding" href={{purchaseUrl}} target="_blank">Purchase Link</a>
-											<a class="text-right text-rightpadding text-bottompadding" href="/{{_id}}/{{../selfId}}/cancelReceive">Didn't receive</a>
+									<div class="container-flex img-infoBox">
+										<a class="fh5co-desc" href={{../purchaseUrl}} target="_blank">{{name}}</a>
+										<div class="container-flex-horizontal">
+											<div class="text-leftmargin"></div>
+											<a class="text-right text-rightpadding text-rightmargin text-bottompadding" href="/{{_id}}/{{../selfId}}/cancelReceive">Didn't receive</a>
 										</div>
 									</div>
 								</div>
@@ -136,6 +138,7 @@
         </div>
         </div>
        </div>
+		{{/unless}}
 	</div>
 	<footer id="fh5co-footer">
 		<div class="container">
@@ -148,7 +151,7 @@
 						<a href="#"><i class="icon-dribbble"></i></a>
 						<a href="#"><i class="icon-youtube"></i></a>
 					</p>
-					<p><small>&copy; By Deseo, produced during Horizons Hackathon. All Rights Reserved. <br>Designed by: <a href="https://www.linkedin.com/in/jingyuan-wang-439301127/" target="_blank">Fried Chicken</a> | Images by: <a href="https://www.google.com/" target="_blank">Google</a> </small></p>
+					<p><small>&copy; By Deseo, produced during Horizons Hackathon. All Rights Reserved. <br>Collaboratively built and designed by <a href="https://www.linkedin.com/in/jingyuan-wang-439301127/" target="_blank">Jing</a> and <a href="https://www.linkedin.com/in/muzheliy/" target="_blank">Yezi</a> | Images by: <a href="https://www.google.com/" target="_blank">Google</a> </small></p>
 				</div>
 			</div>
 		</div>
