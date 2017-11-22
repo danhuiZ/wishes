@@ -327,31 +327,32 @@ routes.post('/authenticate', (req,res)=> {
 routes.post('/friendList',(req,res)=> {
   User.findOne({facebookId:req.body.facebookId}).exec((err,found)=> {
     res.cookie('facebookId',req.body.facebookId,{domain:'.mydeseos.herokuapp.com'});
-    if (found === null) {
-      const newUser = new User({
-        username: req.body.username,
-        facebookId: req.body.facebookId,
-      });
-      newUser.save((err, newUser)=> {
-        res.json({err: err, found: found, mongooseId: newUser._id});
-        return;
-      })
-    } else {
-      let c = found.friendsList || [];
-      let promiseArr = [];
-      const mongooseidArr = req.body.friendList.split('/');
-      mongooseidArr.forEach(id=> {
-        promiseArr.push(User.findOne({facebookId:id}));
-      });
-      Promise.all(promiseArr)
-      .then((data)=> {
-        found.friendsList = data.map(friend=>friend._id)
-        found.update({friendsList:found.friendsList}).exec((err,saved)=> {
-          res.json({err:err,mongooseId:found._id});
-          return;
-        })
-      })
-    }
+		let promiseArr = [];
+		const mongooseidArr = req.body.friendList.split('/');
+		mongooseidArr.forEach(id=> {
+			promiseArr.push(User.findOne({facebookId:id}));
+		});
+		Promise.all(promiseArr)
+		.then((data)=> {
+			if (found === null) {
+				let friends = data.map(friend=>friend._id);
+	      const newUser = new User({
+	        username: req.body.username,
+	        facebookId: req.body.facebookId,
+					friendList: friends
+	      });
+	      newUser.save((err, newUser)=> {
+	        res.json({err: err, mongooseId: newUser._id});
+	        return;
+	      })
+			} else {
+				found.friendsList = data.map(friend=>friend._id)
+				found.update({friendsList:found.friendsList}).exec((err,saved)=> {
+					res.json({err:err, mongooseId:found._id});
+					return;
+				})
+			}
+		})
   })
 });
 

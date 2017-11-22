@@ -20,14 +20,11 @@
       let facebookID = "";
       let username = "";
       if (response.authResponse) {
-       console.log('Welcome!  Fetching your information.... ');
-       console.log(response);
        FB.api('/me', function(response) {
          username = response.name;
          facebookID = response.id;
-         console.log('Good to see you, ' + response.name + '.');
          FB.api('/'+facebookID+'/friends',function(friendResponse) {
-           const friendString = friendResponse.data.map( friend=> friend.id).join('/')
+           const friendString = friendResponse.data.map( friend=> friend.id).join('/');
            $.ajax({
              url:'/friendList',
              method:'post',
@@ -37,8 +34,6 @@
                facebookId:facebookID
              },
              success: function(res) {
-               console.log("success");
-               console.log(res)
                window.top.location = "https://mydeseos.herokuapp.com/"+res.mongooseId+"/wishlists"; //redirect to friendlist page
              },
              error: function(res) {
