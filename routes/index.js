@@ -339,14 +339,14 @@ routes.post('/friendList',(req,res)=> {
 	      const newUser = new User({
 	        username: req.body.username,
 	        facebookId: req.body.facebookId,
-					friendList: friends
+					friendsList: friends
 	      });
 	      newUser.save((err, newUser)=> {
 	        res.json({err: err, mongooseId: newUser._id});
 	        return;
 	      })
 			} else {
-				found.friendsList = data.map(friend=>friend._id)
+				found.friendsList = data.map(friend=>friend._id);
 				found.update({friendsList:found.friendsList}).exec((err,saved)=> {
 					res.json({err:err, mongooseId:found._id});
 					return;
