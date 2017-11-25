@@ -372,4 +372,5 @@ routes.get('/:name/googleSearch',(req,res)=> {
 	console.log(searchStr);
 	res.redirect("www.google.com/search?q="+searchStr);
 });
+
 module.exports = routes;
