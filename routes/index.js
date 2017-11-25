@@ -2,6 +2,9 @@ const express = require('express');
 const models = require('../models/models');
 // const localStorage = require('localStorage');
 
+const reservedSymbol = ["!", "*", "'", "(", ")",";",":","@",
+												"&","=","+","$", ",","/","?","%","#",
+												"[","]"];
 const User = models.User;
 const Gift = models.Gift;
 const routes = express();
@@ -356,4 +359,17 @@ routes.post('/friendList',(req,res)=> {
   })
 });
 
+routes.get('/:name/googleSearch',(req,res)=> {
+	const nameArr = req.params.name.split(' ');
+	let searchArr = [];
+	for (let i = 0; i < nameArr.length; i++) {
+		if (reservedSymbol.indexOf(nameArr[i]) !== -1) {
+			searchArr.push(nameArr[i]);
+		}
+	}
+	const searchStr = searchArr.join("+");
+	console.log(searchArr,"searcHArr");
+	console.log(searchStr);
+	res.redirect("www.google.com/search?q="+searchStr);
+});
 module.exports = routes;
