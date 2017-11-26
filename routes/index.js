@@ -362,12 +362,10 @@ routes.post('/friendList',(req,res)=> {
 routes.get('/:giftId/googleSearch',(req,res)=> {
 	Gift.findById(req.params.giftId).exec((err, foundGift)=> {
 		if (err || !foundGift) {
-			console.log("error occurred or no found gift");
+			res.error("error occurred or no found gift");
 			return;
 		}
 		const nameArr = foundGift.name.toString().split(" ");
-		console.log("name", req.params.name)
-		console.log("namearr", nameArr);
 		let searchArr = [];
 		for (let i = 0; i < nameArr.length; i++) {
 			if (reservedSymbol.indexOf(nameArr[i]) === -1) {
@@ -375,8 +373,6 @@ routes.get('/:giftId/googleSearch',(req,res)=> {
 			}
 		}
 		const searchStr = searchArr.join("+");
-		console.log(searchArr,"searcHArr");
-		console.log(searchStr);
 		res.redirect("http://www.google.com/search?q="+searchStr);
 	});
 });
