@@ -7,7 +7,20 @@ const Gift = models.Gift;
 const routes = express();
 
 routes.get('/',(req,res)=> {
-  res.render('mainpage');
+  User.findOne({_id:'596a131b61c9cc0011cccdda'}).populate('friendsList').populate('giftList').exec((err,found)=> {
+    if (found) {
+      res.render('wishList',{
+        friendList: found.friendsList,
+        found: found,
+        error: err,
+        wishes: found.giftList.reverse(),
+        selfPage: true,
+        userId: found._id
+      })
+    } else {
+      res.send("userid not found")
+    }
+  })
 });
 
 routes.get('/login',(req,res)=> {
